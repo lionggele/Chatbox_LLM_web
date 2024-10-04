@@ -1,6 +1,3 @@
-Here's a sample `README.md` file for your project based on the provided instructions:
-
-```markdown
 # LLM Performance Comparison Platform
 
 ## Introduction
@@ -62,6 +59,18 @@ The platform includes:
 - A comparison interface for side-by-side evaluation of LLM responses to custom queries.
 - A performance dashboard displaying evaluation results.
 - Visualizations (e.g., charts, graphs) comparing LLM performance across various tasks and metrics.
+
+## Setup and Installation
+
+### Prerequisites
+- Node.js installed (for a Node.js-based backend).
+- API keys for OpenAI GPT, Anthropic Claude, and LLaMA (or alternative).
+
+### Clone the Repository
+```bash
+git clone https://github.com/lionggele/Chatbox_LLM_web.git
+cd Chatbox_LLM_web
+
 
 ## Setup and Installation
 
