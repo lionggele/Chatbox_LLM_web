@@ -1,38 +1,290 @@
-.App {
-  text-align: center;
+/* Container layout */
+.app-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #A8D5C3;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Chat section */
+.chat-container {
+  flex: 3;
+  background-color: white;
+  border-radius: 10px;
+  margin: 20px 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure content is spaced between header and input */
+  position: relative; /* Ensures the input box stays at the bottom */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Chatbox header */
+.chatbox-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  position: relative;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.chatbox-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.dropdown-icon {
+  cursor: pointer;
+  font-size: 24px;
+  margin-left: 8px;
+}
+
+.chatbox-header.dropdown {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Dropdown container */
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #E0E0E0;
+  color: #4A4A4A;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  z-index: 100;
+}
+
+/* Dropdown option styling */
+.dropdown-option {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  border: 1px solid #DADADA;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-header {
+  margin: 10px;
+  font-size: 20px;
+}
+
+.dropdown-header img {
+  margin: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.dropdown-option:hover {
+  background-color: #F0F0F0;
+  color: #4A4A4A;
+}
+
+/* Selected option styling */
+.dropdown-option.selected {
+  background-color: #FFFFFF;
+  border: 1px solid #5DC1B9;
+}
+
+/* Checkmark icon for selected option */
+.checkmark-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+/* Info button */
+.info-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.messages {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: white;
+  margin-bottom: 10px; /* Adds spacing between messages and input */
+}
+
+.message {
+  background-color: #F1F1F1;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.message.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  position: sticky;
+  bottom: 0;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chat-input button {
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #5DC1B9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Performance container */
+.performance-container {
+  flex: 2;
+  background-color: white;
+  border-radius: 10px;
+  margin: 20px 5px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.performance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.performance-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.metric-chart {
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.metric p {
+  margin: 0;
+}
+
+.progress-bar {
+  flex-grow: 1;
+  background-color: #F1F1F1;
+  height: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.progress-bar .filled {
+  background-color: #5DC1B9;
+  height: 100%;
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Sidebar */
+.sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px 0;
+  width: 80px;
+  background-color: white;
+  padding: 20px 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-right: 2px solid #A8D5C3;
+  box-sizing: border-box;
+}
+
+.sidebar-item {
+  margin: 20px 0;
+  cursor: pointer;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: auto;
+  height: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar-item img {
+  width: 40px;
+  height: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar-logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-bottom: 20px;
 }
+
+.sidebar-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.sidebar-item.active {
+  background-color: #EAF5F0;
+  width: 79px;
+  height: 80px;
+  border-radius: 10px;
+}
+
+
+.sidebar-item.logout {
+  margin-top: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
