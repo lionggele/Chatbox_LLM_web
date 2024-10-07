@@ -1,31 +1,20 @@
 import React from 'react';
-import logo from './asset/default_logo_icon.jpg';
-import dashboardIcon from './asset/dashboard_icon.png';
-import chatIcon from './asset/messenger_icon.png';
-import analyticsIcon from './asset/result_icon.png';
-import logoutIcon from './asset/logout_icon.png';
+import { Link } from 'react-router-dom'; // To create navigation links
 
 function SideBar() {
-    return (
-        <div className="sidebar">
-            <div className="sidebar-item1">
-                <img src={logo} alt="Logo" className="sidebar-logo" />
-            </div>
-            <div className="sidebar-item">
-                <img src={dashboardIcon} alt="Dashboard" />
-            </div>
-            <div className="sidebar-item active">
-                <img src={chatIcon} alt="Chat" />
-            </div>
-            <div className="sidebar-item">
-                <img src={analyticsIcon} alt="Analytics" />
-            </div>
-            <div className="sidebar-item logout">
-                <img src={logoutIcon} alt="Logout" />
-            </div>
-        </div>
-    );
+  return (
+    <div className="sidebar">
+      <div className="sidebar-item">
+        <Link to="/">LLM Response</Link> {/* Link to ChatBox */}
+      </div>
+      <div className="sidebar-item">
+        <Link to="/comparison">Comparison</Link> {/* Link to Comparison Page */}
+      </div>
+      <div className="sidebar-item">
+        <Link to="/performance">Performance Dashboard</Link> {/* Link to Performance Panel */}
+      </div>
+    </div>
+  );
 }
-
 
 export default SideBar;

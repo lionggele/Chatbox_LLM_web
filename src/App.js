@@ -1,22 +1,25 @@
 import React from 'react';
-import ChatBox from './ChatBox';
-import PerformancePanel from './PerformancePanel';
-import SideBar from './SideBar';
-import './App.css';  // Link to your CSS file
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SideBar from './SideBar'; 
+import ChatBox from './ChatBox'; 
+import ComparisonPage from './Container/ComparisonPage'; 
+import PerformancePanel from './Container/PerformancePanel'; 
+import { ProSidebarProvider } from "react-pro-sidebar";
+import './App.css';
 function App() {
   return (
-    <div className="app-container">
-      <div className="sidebar">
-        < SideBar />
+    <Router>
+      <div className="app-container">
+        <SideBar />
+        <div className="content-container">
+          <Routes>
+            <Route path="/" element={<ChatBox />} /> {/* Default route for Chat */}
+            <Route path="/comparison" element={<ComparisonPage />} /> {/* Route for Comparison */}
+            <Route path="/performance" element={<PerformancePanel />} /> {/* Route for Performance Dashboard */}
+          </Routes>
+        </div>
       </div>
-      <div className="chat-container">
-        <ChatBox />
-      </div>
-      <div className="performance-container">
-        <PerformancePanel />
-      </div>
-    </div>
+    </Router>
   );
 }
 
