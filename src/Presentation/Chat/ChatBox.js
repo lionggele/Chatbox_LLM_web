@@ -1,8 +1,10 @@
+// ChatBox UI ( can separate components)
+// Reference: https://codepen.io/sajadhsm/pen/odaBdd
 import React, { useState } from 'react';
-import infoIcon from '../asset/info_icon.png';
-import checkMarkIcon from '../asset/selected_icon.png';
-import { handleSendMessage } from './handleMessage';
-import { handleDropdownClick, handleModelSelect } from './handleModel';
+import infoIcon from '../../assets/info_icon.png'; 
+import checkMarkIcon from '../../assets/selected_icon.png'; 
+import { handleSendMessage } from '../../Domain/UseCases/handleMessage'; 
+import { handleDropdownClick, handleModelSelect } from '../../Domain/UseCases/handleModel'; 
 function ChatBox() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedModel, setSelectedModel] = useState("GPT-4o");
@@ -16,7 +18,7 @@ function ChatBox() {
     return (
         <div className="chat-container">
             <div className="chatbox-header">
-            <h3 className="dropdown-trigger" onClick={() => handleDropdownClick(setDropdownOpen, dropdownOpen)}>
+                <h3 className="dropdown-trigger" onClick={() => handleDropdownClick(setDropdownOpen, dropdownOpen)}>
                     {selectedModel} ▼
                 </h3>
                 {dropdownOpen && (

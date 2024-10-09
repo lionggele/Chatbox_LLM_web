@@ -32,6 +32,8 @@ html {
   font-family: var(--font-family);
 }
 
+
+/* Sidebar Style */
 .sidebar-container {
   background: #a8d5e5;
   width: auto;
@@ -50,6 +52,7 @@ h2 {
   font-size: 30px;
   white-space: nowrap;
 }
+
 
 .side-item {
   font-family: var(--font-family);
@@ -72,21 +75,15 @@ h2 {
 
 .side-item .ps-submenu-content {
   padding-left: 20px;
-  /* Indent the submenu items */
 }
 
 .side-item a:hover {
   color: lightblue;
 }
+
 .side-item .ps-menuitem-root--open {
   border-left: 4px solid orange;
 }
-
-
-
-
-
-
 
 .content-container {
   flex: 1;
@@ -96,17 +93,22 @@ h2 {
   flex-direction: column;
 }
 
+/* Comparison Container Style */
 .comparison-container {
   padding: 20px;
 }
+
+/* Dashbaord (Performance) Container Style */
 
 .performance-container {
   padding: 20px;
 }
 
+/* ChatBox Style */
 .chat-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: space-between;
   flex: 1;
   background-color: var(--ctr-bg);
@@ -117,8 +119,6 @@ h2 {
   overflow: hidden;
 }
 
-
-/* Chatbox header */
 .chatbox-header {
   display: flex;
   justify-content: flex-start;
@@ -147,7 +147,7 @@ h2 {
   font-size: 18px;
 }
 
-/* Dropdown container */
+/* DropDown Style */
 .dropdown-options {
   position: absolute;
   top: 100%;
@@ -161,7 +161,6 @@ h2 {
   z-index: 100;
 }
 
-/* Dropdown option styling */
 .dropdown-option {
   padding: 10px;
   font-size: 16px;
@@ -191,20 +190,17 @@ h2 {
   color: #4A4A4A;
 }
 
-/* Selected option styling */
 .dropdown-option.selected {
   background-color: #FFFFFF;
   border: 1px solid #5DC1B9;
 }
 
-/* Checkmark icon for selected option */
 .checkmark-icon {
   width: 20px;
   height: 20px;
   margin-left: 10px;
 }
 
-/* Info button */
 .info-icon {
   position: absolute;
   top: 10px;
@@ -214,9 +210,10 @@ h2 {
   height: 20px;
 }
 
+
+/* Messages Style */
 .msgs {
   flex-grow: 1;
-  /* Fills remaining space */
   padding: 10px;
   overflow-y: auto;
   background-color: white;
@@ -291,18 +288,6 @@ h2 {
 
 .send-btn:hover {
   background-color: #4DA89B;
-}
-
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.msgs {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 10px;
 }
 
 .chat-input {

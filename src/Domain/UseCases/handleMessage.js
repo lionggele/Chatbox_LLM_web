@@ -1,5 +1,5 @@
-// Handle Message wtih ( )
-import { sendToFlask } from '../services/apiService';
+// Handle message from User and LLM Model 
+import { sendToFlask } from '../../Data/apiService';
 
 export const handleSendMessage = async (input, setMessages, setInput, setLoading, messages) => {
     if (input.trim()) {
@@ -23,7 +23,6 @@ export const handleSendMessage = async (input, setMessages, setInput, setLoading
                 { text: "Error getting a response from OpenAI", sender: 'bot' }
             ]);
         }
-
         setLoading(false);
     }
 };
