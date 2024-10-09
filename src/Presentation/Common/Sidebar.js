@@ -1,3 +1,5 @@
+// Reference: https://blog.openreplay.com/simple-sidebars-with-react-pro-sidebar-and-material-ui/
+
 import React from "react";
 import { Sidebar, Menu, SubMenu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { Link } from 'react-router-dom';
@@ -8,12 +10,11 @@ import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import ScienceRoundedIcon from "@mui/icons-material/ScienceRounded";
 
 function SideBar() {
-    const { collapseSidebar } = useProSidebar(); // Access the collapseSidebar function
+    const { collapseSidebar } = useProSidebar(); 
 
     return (
         <Sidebar className="side-container">
             <Menu className="side-item">
-                {/* Sidebar collapse toggle with the icon */}
                 <MenuItem
                     className="menu1"
                     icon={
@@ -27,7 +28,6 @@ function SideBar() {
                     <h2>LLM ChatBox</h2>
                 </MenuItem>
 
-                {/* Menu items for navigation */}
                 <MenuItem icon={<ChatRoundedIcon />}>
                     <Link to="/">LLM Response</Link>
                 </MenuItem>

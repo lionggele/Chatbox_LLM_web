@@ -1,4 +1,5 @@
-// Helper function to send the query to the Flask API
+// Helper function to send the query to the Flask API 
+// Reference: https://dev.to/ondiek/sending-data-from-react-to-flask-apm
 export const sendToFlask = async (query) => {
     try {
         const response = await fetch('http://localhost:5000/api/ask', {
