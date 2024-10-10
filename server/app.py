@@ -7,6 +7,7 @@ from flask_cors import CORS
 import boto3
 import openai
 from botocore.exceptions import ClientError
+from handlers import get_handler
 
 app = Flask(__name__)
 CORS(app)
@@ -51,28 +52,61 @@ if secret:
 else:
     raise Exception("Failed to retrieve the OpenAI API key from Secrets Manager")
 
-# Endpoint for handling a query
-@app.route("/api/ask", methods=["POST"])
+# Store the selected model in a global variable
+selected_model = None
+
+# Endpoint to set the model
+@app.route('/set-model', methods=['POST'])
+def set_model():
+    global selected_model
+    data = request.json
+    selected_model = data.get("model")
+    return jsonify({"status": "success", "selected_model": selected_model})
+
+
+# def ask_model():
+#     data = request.json
+#     model_name = data.get("model")
+#     user_query = data.get("query")
+
+#     try:
+#         handler = get_handler(model_name)
+#         response = handler.query(user_query)
+#     except ValueError as e:
+#         return jsonify({"error": str(e)}), 400
+#     except Exception as e:
+#         print(f"Error sending query to LLM: {str(e)}")
+#         response = {"error": str(e)}
+
+#     return jsonify(response)
+
+
+@app.route('/api/ask', methods=['POST'])
 def ask_openai():
+    global selected_model
     data = request.json
     user_query = data.get("query")
-    print(f"{user_query}")
+
+    if not selected_model:
+        return jsonify({"error": "No model selected"}), 400
     
     try:
-        print(f"test1:{user_query}")
+        print(f"User query: {user_query}")
+        print(f"Selected model: {selected_model}")
         openai_response = openai.ChatCompletion.create(
-            model='gpt-4', #  here will be the main part to handle different models
+            model = selected_model, 
             messages=[
-                {"role": "user", "content": user_query}  # User input
+                {"role": "user", "content": user_query} 
             ]
-        )
+        ) # we can do some fine tuning here!!!
+
+
         print(f"test2:{openai_response}")
         
         # Extract and send the response text
         response_text = openai_response['choices'][0]['message']['content'].strip()
         response = {"message": response_text}
-        print(f"test")
-    
+        
     except Exception as e:
         print(f"Error sending query to OpenAI: {str(e)}")
         response = {"error": str(e)}
@@ -82,3 +116,4 @@ def ask_openai():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
+
