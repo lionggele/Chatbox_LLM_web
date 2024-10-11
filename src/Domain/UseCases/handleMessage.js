@@ -6,22 +6,16 @@ import { fetchResponseFromModel } from '../../Domain/UseCases/handleModel';
 
 export const handleSendMessage = async (input, setMessages, setInput, setLoading, messages) => {
     if (input.trim()) {
-        
-        // Add user message to messages
         setMessages([...messages, { text: input, sender: 'user' }]);
         setInput("");
         setLoading(true);
-
-        // Send user input to Flask backend
         const response = await sendToFlask(input);
         if (response && response.message) {
-            // Add bot's response to the messages
             setMessages(prevMessages => [
                 ...prevMessages,
                 { text: response.message, sender: 'bot' }
             ]);
         } else {
-            // Handle error from the backend
             setMessages(prevMessages => [
                 ...prevMessages,
                 { text: "Error getting a response", sender: 'bot' }
@@ -31,7 +25,7 @@ export const handleSendMessage = async (input, setMessages, setInput, setLoading
     }
 };
 
-
+// Testingggg
 export const handleSendMessage_diffLLM = async (
     input,
     setMessagesModel1,
@@ -44,11 +38,9 @@ export const handleSendMessage_diffLLM = async (
   ) => {
     const newMessage = { text: input, sender: 'user' };
   
-    // Update the messages for both models
     setMessagesModel1([...messagesModel1, newMessage]);
     setMessagesModel2([...messagesModel2, newMessage]);
-  
-    // Simulate API calls to both models
+
     setLoading(true);
     try {
       const response1 = await fetchResponseFromModel(selectedModel1, input);

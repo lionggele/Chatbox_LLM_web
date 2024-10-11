@@ -6,9 +6,9 @@ function  ChatInput({ onSend }) {
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent newline in the input
-            onSend(input); // Call the onSend function passed as a prop
-            setInput(""); // Clear the input after sending
+            event.preventDefault(); 
+            onSend(input); 
+            setInput(""); 
         }
     };
 
