@@ -46,6 +46,7 @@ credentials/
 # Python virtual environment folder
 venv/
 ENV/
+.flaskenv
 .venv/
 env/
 .venv.bak/
