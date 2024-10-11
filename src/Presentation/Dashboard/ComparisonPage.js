@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MessageList from '../Chat/MessageList';
 import ChatInput from '../Chat/ChatInput';
-import { modelOptions, updateModelOnServerC, fetchResponseFromModel2, handleModelSelectC, } from '../../Domain/UseCases/handleModel';
+import { modelOptions, handleModelSelectC, fetchResponseFromModel, fetchResponseFromModel2, handleModelSelect, } from '../../Domain/UseCases/handleModel';
 import checkMarkIcon from '../../assets/selected_icon.png';
 
 function ComparisonPage() {
@@ -21,13 +21,13 @@ function ComparisonPage() {
   const handleModelSelectContainer1 = async (displayName, setSelectedModel, setDropdownOpen) => {
     setSelectedModel1(displayName);
     setDropdownOpen1(false);
-    await updateModelOnServerC(displayName, "container1");
+    await updateModelOnServer2(displayName, "container1");
   };
 
   const handleModelSelectContainer2 = async (displayName, setSelectedModel, setDropdownOpen) => {
     setSelectedModel2(displayName);
     setDropdownOpen2(false);
-    await updateModelOnServerC(displayName, "container2");
+    await updateModelOnServer2(displayName, "container2");
   };
 
 
@@ -74,7 +74,7 @@ function ComparisonPage() {
                 {Object.keys(modelOptions).map((displayName) => (
                   <div
                     key={displayName}
-                    onClick={() => handleModelSelectContainer1(displayName, setSelectedModel1, setDropdownOpen1, "container1")}
+                    onClick={() => handleModelSelectC(displayName, setSelectedModel1, setDropdownOpen1)}
                     className={`dropdown-option ${selectedModel1 === displayName ? 'selected' : ''}`}
                   >
                     {displayName}
@@ -103,7 +103,7 @@ function ComparisonPage() {
                 {Object.keys(modelOptions).map((displayName) => (
                   <div
                     key={displayName}
-                    onClick={() => handleModelSelectC(displayName, setSelectedModel2, setDropdownOpen2, "container2")}
+                    onClick={() => handleModelSelectC(displayName, setSelectedModel2, setDropdownOpen2)}
                     className={`dropdown-option ${selectedModel2 === displayName ? 'selected' : ''}`}
                   >
                     {displayName}
@@ -125,6 +125,24 @@ function ComparisonPage() {
   );
 }
 
+// Send the selected model to the Flask API
+export const updateModelOnServer2 = async (modelValue, container) => {
+  try {
+    const response = await fetch(`http://localhost:5000/set-model?container=${container}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ model: modelValue })
+    });
 
+    if (!response.ok) {
+      throw new Error("Error setting model on server");
+    }
+    console.log(`Model set successfully for ${container}:`, modelValue);
+  } catch (error) {
+    console.error("Error setting model:", error);
+  }
+};
 
 export default ComparisonPage;
