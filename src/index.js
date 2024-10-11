@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <div>
       <ProSidebarProvider>
-        <App />  // Renders your main App component within the sidebar provider
+        <App />
       </ProSidebarProvider>
     </div>
   </React.StrictMode>

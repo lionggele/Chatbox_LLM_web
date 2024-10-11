@@ -93,17 +93,6 @@ h2 {
   flex-direction: column;
 }
 
-/* Comparison Container Style */
-.comparison-container {
-  padding: 20px;
-}
-
-/* Dashbaord (Performance) Container Style */
-
-.performance-container {
-  padding: 20px;
-}
-
 /* ChatBox Style */
 .chat-container {
   display: flex;
@@ -293,4 +282,46 @@ h2 {
 .chat-input {
   flex-shrink: 0;
   /* important:!!!! */
+}
+
+/* Comparison Container Style */
+.comparison-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  /* Adjust spacing between the chat boxes */
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+
+/* Chat Container Styling for Side-by-Side Layout */
+.chat-side-container {
+  flex: 1;
+  height: 80vh;
+  /* Adjust the height as per your design requirements */
+  max-width: calc(50% - 10px);
+  /* Allow both chat boxes to take equal space */
+  background-color: var(--ctr-bg);
+  border-radius: 10px;
+  margin: 10px 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+/* Loading Spinner Styling */
+.loading {
+  margin: 10px 0;
+  text-align: center;
+  font-style: italic;
+  color: #777;
+}
+
+
+/* Dashbaord (Performance) Container Style */
+.performance-container {
+  padding: 20px;
 }

@@ -1,4 +1,7 @@
-// Handle Model Selection with Dropdown controller This is just for OPEN AI 
+// Handle Model Selection with Dropdown controller This is just for OPEN AI
+// OPENAI model: https://platform.openai.com/docs/guides/fine-tuning
+// Google (Gemini) : https://ai.google.dev/gemini-api/docs/text-generation?lang=python
+
 export const modelOptions = {
     "GPT-o1-preview": "o1-preview-2024-09-12",
     "GPT-4o-2024-08-06": "gpt-4o-2024-08-06",
@@ -6,26 +9,100 @@ export const modelOptions = {
     "GPT-4-0613": "gpt-4-0613",
     "GPT-3.5-Turbo-0125": "gpt-3.5-turbo-0125",
     "GPT-3.5-Turbo-1106": "gpt-3.5-turbo-1106",
-    "BARDS": " ",
-    "Med-Palms": "",
-    "Additional model": "",
-
+    "Gemini-1.5": "gemini-1.5-flash",
+    "Med-Palms": "med-palms",
+    "Additional model": "additional-model"
 };
 
 // Send the selected model to the Flask API
-export const updateModelOnServer = (modelValue) => {
-    fetch('http://localhost:5000/set-model', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ model: modelValue })
-    }).catch(error => console.error("Error setting model: ", error));
+export const updateModelOnServer = async (modelValue) => {
+    try {
+        const response = await fetch('http://localhost:5000/set-model', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ model: modelValue })
+        });
+
+        if (!response.ok) {
+            throw new Error("Error setting model on server");
+        }
+        console.log("Model set successfully:", modelValue);
+    } catch (error) {
+        console.error("Error setting model:", error);
+    }
 };
 
-// Handle model selection
-export const handleModelSelect = (displayName, setSelectedModel, setDropdownOpen) => {
+// Send the selected model to the Flask API
+export const updateModelOnServerC = async (modelValue, container) => {
+    try {
+        const response = await fetch(`http://localhost:5000/set-model?container=${container}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ model: modelValue })
+        });
+
+        if (!response.ok) {
+            throw new Error("Error setting model on server");
+        }
+        console.log(`Model set successfully for ${container}:`, modelValue);
+    } catch (error) {
+        console.error("Error setting model:", error);
+    }
+};
+
+// Function to handle model selection and update server
+export const handleModelSelect = async (displayName, setSelectedModel, setDropdownOpen) => {
     setSelectedModel(displayName);
     setDropdownOpen(false);
-    updateModelOnServer(modelOptions[displayName]);
+    await updateModelOnServer(modelOptions[displayName]);
+}; 
+
+export const handleModelSelectC = async (displayName, setSelectedModel, setDropdownOpen) => {
+    setSelectedModel(displayName);
+    setDropdownOpen(false);
+    await updateModelOnServerC(modelOptions[displayName]);
 };
+
+export const fetchResponseFromModel = async (model, input) => {
+    try {
+        const response = await fetch('http://localhost:5000/api/ask', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ query: input, model: model }) 
+        });
+        console.log("Selected Model fetch:", model);
+        console.log("Selected Model R:", response);
+        const data = await response.json();
+        return data.message || "Error generating response.";
+    } catch (error) {
+        console.error("Error fetching response from model:", error);
+        return "Error generating response.";
+    }
+};
+
+export const fetchResponseFromModel2 = async (model, input, container) => {
+    try {
+        const response = await fetch('http://localhost:5000/api/ask', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ query: input, model: model, container: container })  // Include container info
+        });
+        console.log("Selected Model fetch:", model);
+        const data = await response.json();
+        return data.message || "Error generating response.";
+    } catch (error) {
+        console.error("Error fetching response from model:", error);
+        return "Error generating response.";
+    }
+};
+
+
+

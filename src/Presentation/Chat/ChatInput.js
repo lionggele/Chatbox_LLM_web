@@ -1,7 +1,7 @@
 // src/Presentation/Chat/ChatInput.js
 import React, { useState } from 'react';
 
-function ChatInput({ onSend }) {
+function  ChatInput({ onSend }) {
     const [input, setInput] = useState("");
 
     const handleKeyPress = (event) => {
