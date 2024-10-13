@@ -50,20 +50,22 @@ def get_open_api_key():
             print(f"An internal service error occurred: {e}")
         return None  #
 
-# Store the API key globally for reuse
-secret = get_open_api_key()
-if secret:
-    api_key = json.loads(secret)["OPENAI_API_KEY"].strip() 
-    openai.api_key = api_key
-    print(f"Retrieved API Key: {api_key}") 
-else:
-    raise Exception("Failed to retrieve the OpenAI API key from Secrets Manager")
+# # Store the API key globally for reuse
+# secret = get_open_api_key()
+# if secret:
+#     api_key = json.loads(secret)["OPENAI_API_KEY"].strip() 
+#     openai.api_key = api_key
+#     print(f"Retrieved API Key: {api_key}") 
+# else:
+#     raise Exception("Failed to retrieve the OpenAI API key from Secrets Manager")
 
 
 ## Google Gemini
 # Access environment variables
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 PROJECT_NUMBER = os.getenv('PROJECT_NUMBER')
+api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = api_key
 
 # Gemini 
 def call_gemini_model(user_query):
@@ -78,6 +80,7 @@ def call_gemini_model(user_query):
                 temperature=1.0,
             ),
         )
+
         response = {"message": response.text}
         return response
     except Exception as e:
@@ -88,14 +91,22 @@ def call_gpt_model(user_query, model):
     try:
         print(f"User query: {user_query}")
         print(f"Selected model GPT: {model}")
-        openai_response = openai.ChatCompletion.create(
+        print('calling openai for response....')
+        openai_response = openai.chat.completions.create(
             model=model,
             messages=[
                 {"role": "user", "content": user_query}
             ]
         )
-        response_text = openai_response['choices'][0]['message']['content'].strip()
+
+        print("OpenAI API call successful")
+        print('openai full response:', openai_response)
+
+        response_text = openai_response.choices[0].message.content.strip()
+        
+        print('openai response:', response_text)
         response = {"message": response_text}
+
         return response
     except Exception as e:
         raise Exception(f"Error generating content with GPT model: {str(e)}")
@@ -135,6 +146,12 @@ def ask_model():
     container = request.json.get("container") 
     user_query = request.json.get("query")
     
+    print('Ask function called')
+    print(f'selected_model: {selected_model}')
+    print(f'selected_model_container1: {selected_model_container1}')
+    print(f'selected_model_container2: {selected_model_container2}')
+    print(f'container: {container}')
+
     if not user_query or not container:
         return jsonify({"error": "Query or container missing"}), 400
 
