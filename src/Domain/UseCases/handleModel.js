@@ -17,6 +17,7 @@ export const modelOptions = {
 // Send the selected model to the Flask API
 export const updateModelOnServer = async (modelValue) => {
     try {
+        console.log('Attempting to update model on server for model:', modelValue);
         const response = await fetch('http://localhost:5000/set-model', {
             method: 'POST',
             headers: {
@@ -28,15 +29,22 @@ export const updateModelOnServer = async (modelValue) => {
         if (!response.ok) {
             throw new Error("Error setting model on server");
         }
+
+        const result = await response.json();
+        console.log('Server response:', result);
         console.log("Model set successfully:", modelValue);
+        return result;
+
     } catch (error) {
         console.error("Error setting model:", error);
+        throw error;
     }
 };
 
 // Send the selected model to the Flask API
 export const updateModelOnServerC = async (modelValue, container) => {
     try {
+        console.log(`Attempting to update model for ${container} with value:`, modelValue);
         const response = await fetch(`http://localhost:5000/set-model?container=${container}`, {
             method: 'POST',
             headers: {
@@ -61,20 +69,21 @@ export const handleModelSelect = async (displayName, setSelectedModel, setDropdo
     await updateModelOnServer(modelOptions[displayName]);
 }; 
 
-export const handleModelSelectC = async (displayName, setSelectedModel, setDropdownOpen) => {
+export const handleModelSelectC = async (displayName, setSelectedModel, setDropdownOpen, containerID) => {
     setSelectedModel(displayName);
+    console.log('Selected model:', displayName);
     setDropdownOpen(false);
-    await updateModelOnServerC(modelOptions[displayName]);
+    await updateModelOnServerC(modelOptions[displayName],containerID);
 };
 
-export const fetchResponseFromModel = async (model, input) => {
+export const fetchResponseFromModel = async (model, input, container) => {
     try {
         const response = await fetch('http://localhost:5000/api/ask', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ query: input, model: model }) 
+            body: JSON.stringify({ query: input, model: model, container: container}) 
         });
         console.log("Selected Model fetch:", model);
         console.log("Selected Model R:", response);
@@ -85,24 +94,5 @@ export const fetchResponseFromModel = async (model, input) => {
         return "Error generating response.";
     }
 };
-
-export const fetchResponseFromModel2 = async (model, input, container) => {
-    try {
-        const response = await fetch('http://localhost:5000/api/ask', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ query: input, model: model, container: container })  // Include container info
-        });
-        console.log("Selected Model fetch:", model);
-        const data = await response.json();
-        return data.message || "Error generating response.";
-    } catch (error) {
-        console.error("Error fetching response from model:", error);
-        return "Error generating response.";
-    }
-};
-
 
 
