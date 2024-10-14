@@ -1,14 +1,15 @@
 // src/Presentation/Chat/ChatInput.js
 import React, { useState } from 'react';
 
-function  ChatInput({ onSend }) {
+function ChatInput({ onSend }) {
     const [input, setInput] = useState("");
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            event.preventDefault(); 
-            onSend(input); 
-            setInput(""); 
+            event.preventDefault();
+            onSend(input);
+            setInput("");
+            console.log("inpupt:", input)
         }
     };
 

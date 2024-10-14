@@ -1,18 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import SideBar from './Presentation/Common/Sidebar'; 
-import AppRouter from './Routes/AppRouter'; 
-import './style/App.css'; 
+import SideBar from './Presentation/Common/Sidebar';
+import AppRouter from './Routes/AppRouter';
+import { ModelProvider } from './Domain/Models/ModelContext';
+
+import './style/App.css';
 function App() {
   return (
-    <Router>
-      <div className="app-container">
-        <SideBar />
-        <div className="content-container">
-          <AppRouter /> 
+    <ModelProvider>
+      <Router>
+        <div className="app-container">
+          <SideBar />
+          <div className="content-container">
+            <AppRouter />
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ModelProvider>
   );
 }
 

@@ -1,47 +1,60 @@
 // ChatBox UI (can separate components)
 // Reference: https://codepen.io/sajadhsm/pen/odaBdd
 
-import React, { useState } from 'react';
-import { handleModelSelect, modelOptions } from '../../Domain/UseCases/handleModel';
+import React, { useState, useContext } from 'react';
+import { ModelContext } from '../../Domain/Models/ModelContext';  // Import the context for model selection
 import { handleSendMessage } from '../../Domain/UseCases/handleMessage';
-import infoIcon from '../../assets/info_icon.png';
-import checkMarkIcon from '../../assets/selected_icon.png';
+import { modelOptions } from '../DropDown/ModelDropDown';
+import checkMarkIcon from '../../assets/selected_icon.png';  // Path to your checkmark icon
 import ChatInput from './ChatInput';
 import MessageList from './MessageList';
 
+
+
 function ChatBox() {
+    const { selectedModel, setSelectedModel } = useContext(ModelContext);  // Access context state
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedModel, setSelectedModel] = useState("Model");
     const [messages, setMessages] = useState([
         { text: "Hi, I’m Sunflower, your ChatGPT assistant. How can I assist you?", sender: 'bot' }
     ]);
     const [loading, setLoading] = useState(false);
 
-    // Send user input to the Flask API
+    // Handle message sending with the selected model
     const handleSend = (input) => {
-        handleSendMessage(input, setMessages, () => { }, setLoading, messages);
+        if (!selectedModel) {
+            setMessages(prevMessages => [...prevMessages, { text: "Please select a model before sending a message.", sender: 'bot' }]);
+            return;
+        }
+        handleSendMessage(input, setMessages, selectedModel, setLoading, messages);  // Pass the selected model
+    };
+
+    // Handle model selection
+    const handleModelSelect = (modelName) => {
+        setSelectedModel(modelName);  
+        console.log("model:", modelName);
+        setDropdownOpen(false);  // Close the dropdown after selection
     };
 
     return (
         <div className="chat-container">
             <div className="chatbox-header">
                 <h3 className="dropdown-trigger" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                    {selectedModel} ▼
+                    {selectedModel || 'Select Model'} ▼
                 </h3>
                 {dropdownOpen && (
                     <div className="dropdown-options">
                         <div className="dropdown-header">
                             <span>Model</span>
                         </div>
-                        {/* to produce clean code and list  */}
-                        {Object.keys(modelOptions).map((displayName) => (
+                        {/* Dropdown for model selection */}
+                        {Object.keys(modelOptions).map((model) => (
                             <div
-                                key={displayName}
-                                onClick={() => handleModelSelect(displayName, setSelectedModel, setDropdownOpen)}
-                                className={`dropdown-option ${selectedModel === displayName ? 'selected' : ''}`}
-                            >
-                                {displayName}
-                                {selectedModel === displayName && (
+                                key={model}
+                                onClick={() => handleModelSelect(model)}
+                                className={`dropdown-option ${selectedModel === model ? 'selected' : ''}`}
+                            > 
+                                {modelOptions[model]}
+                                {selectedModel === model && (
                                     <img src={checkMarkIcon} alt="Check" className="checkmark-icon" />
                                 )}
                             </div>
@@ -50,7 +63,8 @@ function ChatBox() {
                 )}
             </div>
 
-            <MessageList messages={messages} />
+            <MessageList messages={messages}/>
+            
             <ChatInput onSend={handleSend} />
         </div>
     );
