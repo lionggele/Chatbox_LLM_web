@@ -11,6 +11,7 @@ const AppRouter = () => {
             <Route path="/" element={<ChatBox />} />
             <Route path="/comparison" element={<ComparisonPage />} />
             <Route path="/performance" element={<PerformanceDashboard />} />
+            
         </Routes>
     );
 };

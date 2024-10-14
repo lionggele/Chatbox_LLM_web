@@ -1,5 +1,5 @@
-// Message list 
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 function MessageList({ messages }) {
     return (
@@ -10,7 +10,9 @@ function MessageList({ messages }) {
                         <div className="msg-info">
                             <div className="msg-info-name">{msg.sender === 'bot' ? 'BOT' : 'User'}</div>
                         </div>
-                        <div className="msg-text">{msg.text}</div>
+                        <div className="msg-text">
+                            <ReactMarkdown>{msg.text}</ReactMarkdown>
+                        </div>
                     </div>
                 </div>
             ))}
