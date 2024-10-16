@@ -34,7 +34,7 @@ class OpenAIEngine(BaseEngine):
         try:
             # Use invoke() instead of __call__() to comply with the new method
             response = openai_chain.invoke(message)
-            print(f"Retrieved API Key: {response}") 
+            print(f"Chat GPT Response: {response}") 
             response_content = response.content if hasattr(response, 'content') else "No content found"
                 
             return EngineResponse(text=response_content)
@@ -59,7 +59,7 @@ class GoogleVertexAIEngine(BaseEngine):
         if not google_api_key:
             return EngineResponse(text="Error: Google Vertex AI API key not found.")
         
-        print(f"Retrieved API Key: {google_api_key}")
+        print(f"Gemini response: {google_api_key}")
 
         # Create ChatVertexAI chain
         google_chain = ChatVertexAI(
@@ -106,7 +106,7 @@ class MistralAIEngine(BaseEngine):
 
     def send(self, message: str) -> EngineResponse:
         mistral_api_key = os.getenv('MISTRALAI_API_KEY')
-        print(f"Retrieved API Key: {mistral_api_key}")
+        print(f"Mistral : {mistral_api_key}")
         
         if not mistral_api_key:
             return EngineResponse(text="Error: Mistral AI API key not found.")
