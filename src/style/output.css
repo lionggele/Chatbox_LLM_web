@@ -1,0 +1,1371 @@
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+/*
+! tailwindcss v3.4.14 | MIT License | https://tailwindcss.com
+*/
+
+/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  /* 1 */
+  border-width: 0;
+  /* 2 */
+  border-style: solid;
+  /* 2 */
+  border-color: #e5e7eb;
+  /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  /* 3 */
+  tab-size: 4;
+  /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* 4 */
+  font-feature-settings: normal;
+  /* 5 */
+  font-variation-settings: normal;
+  /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0;
+  /* 1 */
+  line-height: inherit;
+  /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  border-top-width: 1px;
+  /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* 1 */
+  font-feature-settings: normal;
+  /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0;
+  /* 1 */
+  border-color: inherit;
+  /* 2 */
+  border-collapse: collapse;
+  /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-feature-settings: inherit;
+  /* 1 */
+  font-variation-settings: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  font-weight: inherit;
+  /* 1 */
+  line-height: inherit;
+  /* 1 */
+  letter-spacing: inherit;
+  /* 1 */
+  color: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  padding: 0;
+  /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button;
+  /* 1 */
+  background-color: transparent;
+  /* 2 */
+  background-image: none;
+  /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  /* 1 */
+  vertical-align: middle;
+  /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+
+.performance-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chart-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container .recharts-responsive-container {
+  width: 100%;
+  height: 400px;
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --primary: 142 86% 28%;
+  --primary-foreground: 356 29% 98%;
+  --chart-1: 139 65% 20%;
+  --chart-2: 140 74% 44%;
+  /* Add other CSS variables as needed */
+}
+
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.table {
+  display: table;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.w-4 {
+  width: 1rem;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.leading-none {
+  line-height: 1;
+}
+
+:root {
+  --body-bg: #A8D5C3;
+  --ctr-bg: #ffffff;
+  --left-msg-bg: #ececec;
+  --right-msg-bg: #215742;
+  --font-family: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+  background-color: var(--body-bg);
+}
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.app-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  margin-bottom: 30px;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+/* Sidebar Style */
+
+.sidebar-container {
+  background: #a8d5e5;
+  width: auto;
+  min-width: 200px;
+  padding: 5px;
+}
+
+.menu1 {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+h2 {
+  color: #165a72;
+  margin: 20px;
+  font-size: 30px;
+  white-space: nowrap;
+}
+
+.side-item {
+  font-family: var(--font-family);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.side-item a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
+  padding: 10px;
+  display: block;
+}
+
+.side-item .ps-menuitem-root {
+  margin-left: 0;
+}
+
+.side-item .ps-submenu-content {
+  padding-left: 20px;
+}
+
+.side-item a:hover {
+  color: lightblue;
+}
+
+.side-item .ps-menuitem-root--open {
+  border-left: 4px solid orange;
+}
+
+.content-container {
+  flex: 1;
+  padding: 20px;
+  background-color: var(--ctr-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ChatBox Style */
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  flex: 1;
+  background-color: var(--ctr-bg);
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 0;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  overflow: hidden;
+}
+
+.chatbox-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 20px;
+  /* background-color: var(--ctr-bg); */
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+
+.chatbox-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.dropdown-icon {
+  cursor: pointer;
+  font-size: 24px;
+  margin-left: 8px;
+}
+
+.chatbox-header.dropdown {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* DropDown Style */
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #E0E0E0;
+  color: #4A4A4A;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  z-index: 100;
+}
+
+.dropdown-option {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  border: 1px solid #DADADA;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-header {
+  margin: 10px;
+  font-size: 20px;
+}
+
+.dropdown-header img {
+  margin: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.dropdown-option:hover {
+  background-color: #F0F0F0;
+  color: #4A4A4A;
+}
+
+.dropdown-option.selected {
+  background-color: #FFFFFF;
+  border: 1px solid #5DC1B9;
+}
+
+.checkmark-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.info-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+/* Messages Style */
+
+.msgs {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.msg {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.msg:last-of-type {
+  margin: 0;
+}
+
+/* MSG Style */
+
+.msg-bubble {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.6;
+  color: #4f4f4f;
+  font-size: 18px;
+}
+
+.msg-bubble h1,
+.msg-bubble h2,
+.msg-bubble h3,
+.msg-bubble h4,
+.msg-bubble h5,
+.msg-bubble h6 {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.msg-bubble ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.msg-bubble li {
+  margin-bottom: 8px;
+}
+
+.msg-bubble ol {
+  padding-left: 25px;
+  margin: 0;
+}
+
+.msg-bubble ol li {
+  margin-bottom: 8px;
+}
+
+.msg-bubble blockquote {
+  margin: 0;
+  padding: 10px;
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+}
+
+.msg-bubble pre {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.msg-bubble code {
+  background-color: #eee;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+}
+
+.msg-bubble strong {
+  font-weight: bold;
+}
+
+.msg-bubble em {
+  font-style: italic;
+}
+
+.msg-bubble a {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.msg-bubble hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0;
+}
+
+.msg-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.msg-info-name {
+  font-weight: bold;
+}
+
+.left-msg {
+  color: #777;
+}
+
+.left-msg .msg-bubble {
+  border-bottom-left-radius: 0;
+}
+
+.right-msg {
+  display: flex;
+  align-items: right;
+  flex-direction: row-reverse;
+}
+
+.right-msg .msg-bubble {
+  background: var(--right-msg-bg);
+  color: #fff;
+  border-bottom-right-radius: 0;
+}
+
+.msg-text {
+  margin-left: 3px;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.chat-textarea {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.send-btn {
+  width: 100px;
+  text-align: center;
+  margin-left: 10px;
+  background-color: #5DC1B9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+
+.send-btn:hover {
+  background-color: #4DA89B;
+}
+
+.chat-input {
+  flex-shrink: 0;
+  /* important:!!!! */
+}
+
+/* Comparison Container Style */
+
+.comparison-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  /* Adjust spacing between the chat boxes */
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+/* Chat Container Styling for Side-by-Side Layout */
+
+.chat-side-container {
+  flex: 1;
+  height: 80vh;
+  /* Adjust the height as per your design requirements */
+  max-width: calc(50% - 10px);
+  /* Allow both chat boxes to take equal space */
+  background-color: var(--ctr-bg);
+  border-radius: 10px;
+  margin: 10px 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Loading Spinner Styling */
+
+.loading {
+  margin: 10px 0;
+  text-align: center;
+  font-style: italic;
+  color: #777;
+}
+
+/* Dashboard (Performance) Container Style */
+
+.performance-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-start;
+  flex: 1;
+  background-color: var(--ctr-bg);
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 10px 20px;
+  overflow: hidden;
+}
+
+.model-selection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.model-selection h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.button-group-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+  justify-content: flex-start;
+}
+
+.button-group-container span {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.dataset-button-group,
+.sampling-button-group {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--right-msg-bg);
+  border-radius: 15px;
+  padding: 5px;
+  gap: 10px;
+}
+
+.dataset-button,
+.sampling-button {
+  padding: 10px 15px;
+  background-color: #ffffff;
+  border: 2px solid var(--right-msg-bg);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.dataset-button.selected,
+.sampling-button.selected {
+  background-color: var(--right-msg-bg);
+  color: #ffffff;
+}
+
+.dataset-button:hover,
+.sampling-button:hover {
+  background-color: var(--body-bg);
+}
+
+h3.title-performanceboard {
+  color: #165a72;
+  margin: 5px 0;
+  font-size: 20px;
+  font-weight: 600;
+  font-weight: bold;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: var(--right-msg-bg);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: lightblue;
+}
+
+.submit-button:active {
+  background-color: var(--body-bg);
+}
+
+/* This is just for fun (experiment) for testing the SQuAD evalution prompt test */
+
+.container-with-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 10px;
+  width: 100%;
+}
+
+.data-input {
+  width: 100%;
+  /* Match the width of the container it's inside */
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.new-row-btn {
+  background-color: #ffffff;
+  border: 2px solid #165a72;
+  /* Green color for border */
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* .clear-btn {
+  background-color: #e0f2f1; 
+  border: 1px solid #165a72;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+.data-input-btn {
+  background-color: var(--right-msg-bg);
+  /*#165a72; /* Green background */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.data-input-btn:hover {
+  background-color: #0e3f4d;
+}
+
+.message-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.message {
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* LLM Response Dataset Card */
+
+.dataset-card {
+  margin-top: 10px;
+  width: 100%;
+  overflow-x: auto;
+  max-height: 300px;
+  /* Ensure horizontal scroll for long content and vertical scroll for max height */
+  position: relative;
+  /* Position relative to fix title and header */
+  border-radius: 7px;
+}
+
+.dataset-title-container {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding: 10px 14px;
+}
+
+.dataset-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  /* this is to ensures control over column widths */
+  position: relative;
+}
+
+.dataset-table th,
+.dataset-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.dataset-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  text-align: center;
+  position: sticky;
+  /* Fix the header while scrolling */
+  top: 50px;
+  z-index: 2;
+}
+
+.dataset-table th:nth-child(3),
+.dataset-table td:nth-child(3) {
+  width: 30%;
+}
+
+.dataset-table th:nth-child(4),
+.dataset-table td:nth-child(4) {
+  width: 20%;
+}
+
+.dataset-table th:nth-child(6),
+.dataset-table td:nth-child(6) {
+  width: 25%;
+}
+
+.dataset-card {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Chart container part in Perforamance Dasthbaord */
+
+/* .chart-container {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;  
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-box {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+} */
