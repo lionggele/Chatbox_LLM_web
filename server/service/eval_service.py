@@ -102,7 +102,7 @@ with open(responses_output_file, 'w') as f:
 
 print(f"LLM responses have been saved to {responses_output_file}")
 
-
+## can use the  regexes_to_ignore=["the ", "yell", "YELL"], ignore_case=True, ignore_punctuation=True) instead of the extra function
 def normalize_answer(s):
     """Lower text and remove punctuation, articles, and extra whitespace."""
     def remove_articles(text):
