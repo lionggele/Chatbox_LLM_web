@@ -1,63 +1,235 @@
-import React from 'react';
+// Reference: https://huggingface.co/spaces/evaluate-metric/exact_match
+
+import React, { useState, useContext } from 'react';
+import { ModelContext } from '../../Domain/Models/ModelContext';
+import { modelOptions } from '../DropDown/ModelDropDown';
+import checkMarkIcon from '../../assets/selected_icon.png';
+import { PerformanceBarChart } from './PerformanceChart';
+// import { Box, Grid, Typography } from '@mui/material';
+// import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+// This is nonsense no need care
+const randomWords = [
+  'apple', 'banana', 'cherry', 'dog', 'elephant', 'flower', 'giraffe', 'honey', 'island', 'jungle',
+  'kitten', 'lemon', 'mountain', 'nest', 'ocean', 'panda', 'queen', 'river', 'sunset', 'tiger',
+  'umbrella', 'violet', 'waterfall', 'xylophone', 'yarn', 'zebra'
+];
+
+const getRandomWords = (numWords) => {
+  let words = [];
+  for (let i = 0; i < numWords; i++) {
+    const randomIndex = Math.floor(Math.random() * randomWords.length);
+    words.push(randomWords[randomIndex]);
+  }
+  return words.join(' ');
+};
 
 function PerformanceDashboard() {
+  const { selectedModel, setSelectedModel } = useContext(ModelContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedDataset, setSelectedDataset] = useState("SQuAD");
+  const [selectedSampling, setSelectedSampling] = useState(10);
+  const [evaluationResults, setEvaluationResults] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const data = [
+    { name: 'Sample 1', f1Score: 0.93, bleuScore: 0.87 },
+    { name: 'Sample 2', f1Score: 0.82, bleuScore: 0.76 },
+    { name: 'Sample 3', f1Score: 0.74, bleuScore: 0.69 },
+  ];
+
+  const handleModelSelect = (modelName) => {
+    setSelectedModel(modelName);
+    console.log("model:", modelName);
+    setDropdownOpen(false);
+  };
+
+  const handleSubmit = () => {
+    const newResults = rows.map((row, index) => ({
+      id: `sample-${index + 1}`,
+      title: `Title ${index + 1}`,
+      context: `Sample context for row ${getRandomWords(10)} ${index + 1}`,
+      question: `Sample question for row  ${getRandomWords(10)} ${index + 1}`,
+      answer: row.reference,
+      llm_response: row.prediction,
+      f1_score: Math.random().toFixed(2),
+      bleu_score: Math.random().toFixed(2),
+    }));
+    setEvaluationResults(newResults);
+    setMessage('Form submitted successfully!');
+  };
+
+  const [rows, setRows] = useState([{ prediction: '', reference: '' }]);
+  const [message, setMessage] = useState('');
+
+  const handleAddRow = () => {
+    setRows([...rows, { prediction: '', reference: '' }]);
+  };
+
+  const handleRowChange = (index, field, value) => {
+    const updatedRows = [...rows];
+    updatedRows[index][field] = value;
+    setRows(updatedRows);
+  };
+
+  const handleClear = () => {
+    setRows([{ prediction: '', reference: '' }]);
+    setMessage('');
+  };
+
   return (
-    <div className="performance-panel">
-      <div className="performance-header">
-        <h3>Performance</h3>
-        <div className="dropdown">▼</div>
+    <div className="performance-container">
+      <div className="model-selection">
+        <h3 className="dropdown-trigger" onClick={() => setDropdownOpen(!dropdownOpen)}>
+          {selectedModel || 'Select Model'} ▼
+        </h3>
+        {dropdownOpen && (
+          <div className="dropdown-options">
+            <div className="dropdown-header">
+              <span>Model</span>
+            </div>
+            {Object.keys(modelOptions).map((model) => (
+              <div
+                key={model}
+                onClick={() => handleModelSelect(model)}
+                className={`dropdown-option ${selectedModel === model ? 'selected' : ''}`}
+              >
+                {modelOptions[model]}
+                {selectedModel === model && (
+                  <img src={checkMarkIcon} alt="Check" className="checkmark-icon" />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      <div className="metric-chart">
-        <div className="metric">
-          <p>Accuracy</p>
-          <div className="progress-bar">
-            <span className="filled" style={{ width: '70%' }}></span>
-          </div>
-          <p>0.7</p>
+      <div className="button-group-container">
+        <span><h3 className="title-performanceboard">Dataset:</h3></span>
+        <div className="dataset-button-group">
+          {['SQuAD', 'Truthful'].map((dataset) => (
+            <button
+              key={dataset}
+              className={`dataset-button ${selectedDataset === dataset ? 'selected' : ''}`}
+              onClick={() => setSelectedDataset(dataset)}
+            >
+              {dataset}
+            </button>
+          ))}
         </div>
-        <div className="metric">
-          <p>F1 Score</p>
-          <div className="progress-bar">
-            <span className="filled" style={{ width: '70%' }}></span>
-          </div>
-          <p>0.7</p>
+      </div>
+      <div className="button-group-container">
+        <span><h3 className="title-performanceboard">Random Sampling:</h3></span>
+        <div className="sampling-button-group">
+          {[10, 20, 50, 100].map((sample) => (
+            <button
+              key={sample}
+              className={`sampling-button ${selectedSampling === sample ? 'selected' : ''}`}
+              onClick={() => setSelectedSampling(sample)}
+            >
+              {sample}
+            </button>
+          ))}
         </div>
+      </div>
+      <div className="submit-container">
+        <button className="submit-button" onClick={handleSubmit}>Submit</button>
+      </div>
+      <div className="container-with-input">
+        <div className="data-input">
+          <h3 className="title-performanceboard">Data Input</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Predictions</th>
+                <th>References</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr key={index}>
+                  <td>
+                    <input
+                      type="text"
+                      value={row.prediction}
+                      onChange={(e) => handleRowChange(index, 'prediction', e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={row.reference}
+                      onChange={(e) => handleRowChange(index, 'reference', e.target.value)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="buttons">
+            <button className="data-input-btn" onClick={handleAddRow}>New row</button>
+            <button className="data-input-btn" onClick={handleClear}>Clear</button>
+            <button className="data-input-btn" onClick={handleSubmit}>Submit</button>
+          </div>
+          {message && (
+            <div className="message-container">
+              <div className={`message ${message === 'Form submitted successfully!' ? 'success' : 'error'}`}>
+                {message}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className={`dataset-card ${isExpanded ? 'expanded' : ''}`}>
+        <div className="dataset-title-container">
+          <h3 className="title-performanceboard">Generated Performance Dataset</h3>
+        </div>
+        <div className="dataset-table-wrapper">
+          <table className="dataset-table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Context</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>LLM Response</th>
+                <th>F1 Score</th>
+                <th>BLEU Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {evaluationResults.map((result) => (
+                <tr key={result.id}>
+                  <td>{result.id}</td>
+                  <td>{result.title}</td>
+                  <td>{result.context}</td>
+                  <td>{result.question}</td>
+                  <td>{result.answer}</td>
+                  <td>{result.llm_response}</td>
+                  <td>{result.f1_score}</td>
+                  <td>{result.bleu_score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <button onClick={toggleExpand} className="toggle-button">
+          {isExpanded ? 'Show Less' : 'Show More'}
+        </button>
+      </div>
+      <div className='chart-container'>
+        <PerformanceBarChart />
+      </div>
+      <div className='chart-container'>
+        <PerformanceBarChart />
       </div>
     </div>
   );
 }
 
 export default PerformanceDashboard;
-
-
-// import React from 'react';
-
-// function PerformancePanel() {
-//   return (
-// <div className="performance-panel">
-//   <div className="performance-header">
-//     <h3>Performance</h3>
-//     <div className="dropdown">▼</div>
-//   </div>
-//   <div className="metric-chart">
-//     <div className="metric">
-//       <p>Accuracy</p>
-//       <div className="progress-bar">
-//         <span className="filled" style={{ width: '70%' }}></span>
-//       </div>
-//       <p>0.7</p>
-//     </div>
-//     <div className="metric">
-//       <p>F1 Score</p>
-//       <div className="progress-bar">
-//         <span className="filled" style={{ width: '70%' }}></span>
-//       </div>
-//       <p>0.7</p>
-//     </div>
-//     {/* Add more metrics as needed */}
-//   </div>
-// </div>
-//   );
-// }
-
-// export default PerformancePanel;
