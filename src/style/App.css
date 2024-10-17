@@ -651,19 +651,56 @@ input[type="text"] {
   padding: 10px 20px;
 }
 
+/* Dataset Button Styling */
+.dataset-button {
+  background-color: var(--ctr-bg); /* Neutral color for not selected state (container background) */
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dataset-button.selected {
+  background-color: var(--right-msg-bg); /* Highlight color for selected state (right message background) */
+  color: white;
+}
+
+/* Sampling Button Styling */
+.sampling-button {
+  background-color: var(--ctr-bg); /* Neutral color for not selected state (container background) */
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sampling-button.selected {
+  background-color: var(--right-msg-bg); /* Highlight color for selected state (right message background) */
+  color: white;
+}
+
+/* Add hover effect for better user experience */
+.dataset-button:hover,
+.sampling-button:hover {
+  background-color: var(--left-msg-bg);
+  cursor: pointer;
+}
+
 .dataset-card {
   margin-top: 10px;
   width: 100%;
-  max-height: 250px; 
+  max-height: 1050px;
   overflow-y: visible;
   position: relative;
   border-radius: 7px;
-  transition: max-height 0.3s ease; 
+  transition: max-height 0.3s ease;
+  z-index: 10; 
 }
 
-
 .dataset-card.expanded {
-  max-height: 1000px; /* Set to a large value to show all rows */
+  max-height: 3000px; 
 }
 
 .dataset-title-container {
@@ -671,7 +708,7 @@ input[type="text"] {
   font-weight: bold;
   position: sticky;
   top: 0;
-  z-index: 3;
+  z-index: 11; 
   padding: 10px 14px;
 }
 
@@ -714,12 +751,9 @@ input[type="text"] {
   width: 25%;
 }
 
-
-.dataset-card {
-  max-height: 300px;
-  /* overflow-y: auto; */
+.dataset-table-wrapper {
+  overflow-x: auto;
 }
-
 
 .toggle-button {
   align-self: center; 
@@ -739,6 +773,35 @@ input[type="text"] {
   background-color: lightblue;
 }
 
+/* LoadingSpinner.css */
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #3498db; 
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 
 
 
@@ -755,18 +818,19 @@ input[type="text"] {
   }
 
   .chart-container {
-    width: 100%;  /* Ensure the container takes the full width of its parent */
-    margin-top: 20px;
+    z-index: 5; 
+    width: 100%;
+    margin-top: 20px;  /* Adds spacing between the dataset card and chart container */
     padding: 20px;
     background-color: var(--card);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;  /* To center the content inside */
+    display: flex;
     justify-content: center;
-    align-items: center; /* Ensure the chart is vertically centered */
-    box-sizing: border-box; /* Include padding and border in element's width */
+    align-items: center;
+    box-sizing: border-box;
   }
-
+  
   .chart-container .recharts-responsive-container {
     width: 100%;  /* Use full width of the container */
     max-width: 800px;  /* Set a maximum width for readability */
