@@ -1,7 +1,5 @@
 # Reference Dataset: https://paperswithcode.com/dataset/squad
 
-
-
 import json
 import random
 import csv
