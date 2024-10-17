@@ -24,7 +24,7 @@ def normalize_answer(s):
 
     return white_space_fix(remove_articles(remove_punctuation(lower(s))))
 
-def evaluate_llm_responses(qa_pairs, responses, output_file):
+def evaluate_llm_responses(qa_pairs, responses, output_file,experiment_id):
     evaluation_results = []
     total_f1_score = 0
     total_bleu_score = 0
@@ -50,7 +50,7 @@ def evaluate_llm_responses(qa_pairs, responses, output_file):
         # Store the evaluation results
         evaluation_results.append({
             "id": qa["id"],
-            "title": qa["title"] if "title" in qa else "", 
+            "experiment_id": experiment_id, 
             "context": qa['context'],
             "question": qa['question'],
             "correct_answer": qa['answer'],

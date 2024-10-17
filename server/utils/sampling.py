@@ -32,7 +32,7 @@ def sample_squad_dataset(sampling_size):
     id_counter = 1  # Initialize a counter for IDs
 
     for article in dataset:
-        title = article.get('title', '')
+        title = article.get('title', )
         for paragraph in article.get('paragraphs', []):
             context = paragraph.get('context', '')
             for qa in paragraph.get('qas', []):
