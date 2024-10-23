@@ -2,6 +2,7 @@
 // import { sendToFlask } from '../../Data/apiService';
 // import { fetchResponseFromModel } from '../../Domain/UseCases/handleModel';
 
+<<<<<<< HEAD
 
 
 // // Domain/UseCases/handleMessage.js
@@ -68,6 +69,13 @@ export const handleSendMessage = async (input, setMessages, selectedModel, setLo
     
     try {
         const response = await fetch('http://localhost:5000/api/query', {  
+=======
+export const handleSendMessage = async (input, setMessages, selectedModel, setLoading, messages) => {
+    setLoading(true);
+
+    try {
+        const response = await fetch('http://localhost:5000/api/query', {
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,7 +86,11 @@ export const handleSendMessage = async (input, setMessages, selectedModel, setLo
             }),
         });
 
+<<<<<<< HEAD
         const data = await response.json();        
+=======
+        const data = await response.json();
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
         // Update messages with the model's response
         setMessages([...messages, { text: input, sender: 'user' }, { text: data[selectedModel], sender: 'bot' }]);
     } catch (error) {
