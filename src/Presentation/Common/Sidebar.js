@@ -8,9 +8,10 @@ import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
 import CompareArrowsRoundedIcon from "@mui/icons-material/CompareArrowsRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import ScienceRoundedIcon from "@mui/icons-material/ScienceRounded";
+import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
 
 function SideBar() {
-    const { collapseSidebar } = useProSidebar(); 
+    const { collapseSidebar } = useProSidebar();
 
     return (
         <Sidebar className="side-container">
@@ -37,9 +38,11 @@ function SideBar() {
                 <MenuItem icon={<DashboardRoundedIcon />}>
                     <Link to="/performance">Performance Dashboard</Link>
                 </MenuItem>
+                {/* Updated Testing SubMenu to include a link to the Leaderboard */}
                 <SubMenu label="Testing" icon={<ScienceRoundedIcon />}>
-                    <MenuItem>Test 1</MenuItem>
-                    <MenuItem>Test 2</MenuItem>
+                    <MenuItem icon={<LeaderboardRoundedIcon />}>
+                        <Link to="/leaderboard">Leaderboard</Link>
+                    </MenuItem>
                 </SubMenu>
             </Menu>
         </Sidebar>
@@ -47,4 +50,3 @@ function SideBar() {
 }
 
 export default SideBar;
-    

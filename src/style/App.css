@@ -387,7 +387,6 @@ h2 {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  /* Adjust spacing between the chat boxes */
   padding: 20px;
   flex-wrap: wrap;
 }
@@ -397,9 +396,7 @@ h2 {
 .chat-side-container {
   flex: 1;
   height: 80vh;
-  /* Adjust the height as per your design requirements */
   max-width: calc(50% - 10px);
-  /* Allow both chat boxes to take equal space */
   background-color: var(--ctr-bg);
   border-radius: 10px;
   margin: 10px 5px;
@@ -642,7 +639,7 @@ input[type="text"] {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-height: 90vh; /* Limit height to make container scrollable */
+  max-height: 90vh;
   overflow-y: auto; /* Enable scrolling for the entire container */
   overflow-x: hidden; /* Prevent horizontal scrolling */
   background-color: var(--ctr-bg);
@@ -653,7 +650,7 @@ input[type="text"] {
 
 /* Dataset Button Styling */
 .dataset-button {
-  background-color: var(--ctr-bg); /* Neutral color for not selected state (container background) */
+  background-color: var(--ctr-bg); 
   color: #333;
   border: 1px solid #ccc;
   padding: 8px 16px;
@@ -662,13 +659,12 @@ input[type="text"] {
 }
 
 .dataset-button.selected {
-  background-color: var(--right-msg-bg); /* Highlight color for selected state (right message background) */
-  color: white;
+  background-color: var(--right-msg-bg); 
 }
 
 /* Sampling Button Styling */
 .sampling-button {
-  background-color: var(--ctr-bg); /* Neutral color for not selected state (container background) */
+  background-color: var(--ctr-bg);
   color: #333;
   border: 1px solid #ccc;
   padding: 8px 16px;
@@ -677,21 +673,45 @@ input[type="text"] {
 }
 
 .sampling-button.selected {
-  background-color: var(--right-msg-bg); /* Highlight color for selected state (right message background) */
+  background-color: var(--right-msg-bg); 
   color: white;
 }
 
-/* Add hover effect for better user experience */
 .dataset-button:hover,
 .sampling-button:hover {
   background-color: var(--left-msg-bg);
   cursor: pointer;
 }
 
+/* Dataset card (LLM Response) */
+.new-evaluated-results-container {
+  radius: 1px;
+  width: 100%;  
+  box-sizing: border-box;  
+  padding: 20px; 
+  margin-bottom: 20px;  
+}
+
+.new-evaluated-table {
+  width: 100%;  /* Make the table take the full width of the container */
+  border-collapse: collapse;  /* Merge table borders to avoid double lines */
+  margin-top: 15px;  /* Space between the heading and table */
+}
+
+.new-evaluated-table th, .new-evaluated-table td {
+  border: 1px solid #ccc;  /* Light border for each cell */
+  padding: 10px;  /* Space inside cells for readability */
+  text-align: left;  /* Align text to the left for consistency */
+}
+
+.new-evaluated-table th {
+  background-color: #f9f9f9;  /* Light background for header cells */
+  font-weight: bold;
+}
+
 .dataset-card {
-  margin-top: 10px;
+  margin-top: px;
   width: 100%;
-  max-height: 1050px;
   overflow-y: visible;
   position: relative;
   border-radius: 7px;
@@ -704,56 +724,94 @@ input[type="text"] {
 }
 
 .dataset-title-container {
+  border: 1px solid #ddd; 
   background-color: #f0f0f0;
   font-weight: bold;
   position: sticky;
   top: 0;
   z-index: 11; 
-  padding: 10px 14px;
+  padding: 8px 14px;
 }
 
 .dataset-table {
   width: 100%;
   table-layout: fixed; 
-  position: relative;
   word-wrap: break-word;
 }
 
-.dataset-table th,
+
+
 .dataset-table td {
   padding: 8px;
   text-align: center;
   white-space: normal;
+  border: 1px solid #ddd; 
 }
 
 .dataset-table th {
+  padding: 8px;
+  text-align: center;
+  white-space: normal;
   background-color: #f0f0f0;
   font-weight: bold;
-  text-align: center;
   position: sticky;
-  top: 0; /* Ensure header stays at the top */
-  z-index: 2;
+  border: 1px solid #ddd; 
+  top: 0;
+  z-index: 11; 
 }
 
 
+/* Experiment ID */
+.dataset-table th:nth-child(2),
+.dataset-table td:nth-child(2) {
+  width: 8%; 
+}
+
+
+/* Context */
 .dataset-table th:nth-child(3),
 .dataset-table td:nth-child(3) {
-  width: 30%;
+  width: 35%; 
 }
 
+/* Question */
 .dataset-table th:nth-child(4),
 .dataset-table td:nth-child(4) {
-  width: 20%;
+  width:10%; 
 }
 
+/* Answer */
+.dataset-table th:nth-child(5),
+.dataset-table td:nth-child(5) {
+  width: 8%; 
+}
+
+/* LLM Response  */
 .dataset-table th:nth-child(6),
 .dataset-table td:nth-child(6) {
-  width: 25%;
+  width: 20%; 
 }
 
-.dataset-table-wrapper {
-  overflow-x: auto;
+/* F1 Score */
+.dataset-table th:nth-child(7),
+.dataset-table td:nth-child(7) {
+  width: 5%; 
 }
+
+/* BLEU Score*/
+.dataset-table th:nth-child(8),
+.dataset-table td:nth-child(8) {
+  width: 5%; 
+}
+
+
+
+.dataset-table-wrapper {
+  position: relative;
+  overflow-x: auto;
+  max-height: 3000px;
+}
+
 
 .toggle-button {
   align-self: center; 
@@ -803,9 +861,172 @@ input[type="text"] {
 
 
 
+/* CSS Code for Enhanced Styling */
+.view-all-button {
+  border: 2px solid #2e6b44; /* Dark green border */
+  border-radius: 12px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #2e6b44, #4caf50); /* Gradient background */
+  color: #fff; /* White text */
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease; /* Smooth transition for all changes */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.view-all-button.selected {
+  background: linear-gradient(135deg, #4caf50, #2e6b44); /* Darker gradient when selected */
+  border: 2px solid #4caf50; /* Emphasize the selected state */
+}
+
+.view-all-button:hover:not(:disabled) {
+  transform: scale(1.05); /* Slightly increase the button size */
+  background: linear-gradient(135deg, #4caf50, #81c784); /* Lighter gradient for hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More shadow on hover */
+}
+
+.view-all-button:disabled {
+  background: #ccc; /* Gray color for disabled state */
+  color: #888;
+  cursor: not-allowed;
+}
+
+.view-all-button:focus {
+  outline: 3px solid #c8e6c9; /* Light green focus outline for better accessibility */
+  outline-offset: 2px;
+}
+
+/* Laederboard */
+.leaderboard-container {
+  margin: 20px auto;  /* Adds margin to the top and bottom, aligns center horizontally */
+  padding: 15px;  /* Increased padding for better spacing */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f9f9f9;
+  width: 100%; 
+  overflow-x: auto;  /* Allows horizontal scroll if needed */
+}
+
+.title-performanceboard {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;  /* Increased font size to make it stand out more */
+  font-weight: bold;  /* Make the title bold */
+  color: #333;  /* Slightly darker color for better contrast */
+}
+
+.leaderboard-table {
+  width: 100%;
+  margin-top:15px;
+  margin-bottom: 20px;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th {
+  padding: 10px; /* Reduced padding slightly for a cleaner look */
+  border-bottom: 2px solid #e0e0e0; /* Subtle bottom border for emphasis */
+  background-color: #f5f5f5; /* Light gray background for a neutral appearance */
+  color: #333; /* Darker text color for better readability */
+  font-size: 1rem; /* Standardized font size */
+  text-transform: capitalize; /* Use capitalization for a less aggressive emphasis */
+  font-weight: bold; /* Keep bold text for distinction */
+  text-align: center; /* Center-align text for a balanced layout */
+  letter-spacing: 0.02em; /* Slightly reduced letter spacing */
+  user-select: none; /* Prevent accidental text selection */
+  white-space: nowrap; /* Prevent text wrapping in the header */
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 12px;  /* Increased padding for better readability */
+  border: 1px solid #ddd;
+}
+
+.leaderboard-table thead tr {
+  background: #4caf50;
+  color: #fff;
+}
+
+.selected-row {
+  background: #f0f8ff;
+}
+
+.chart-container-leaderboard {
+  margin: 0 auto; /* Center the container horizontally */
+  width: 100%; /* Make the container take up more of the viewport width */
+  overflow: hidden; /* Remove unnecessary scrolling */
+  border: 1px solid #e0e0e0; /* Soft border for subtle definition */
+  border-radius: 12px; /* Slightly more rounded corners for a modern look */
+  padding: 30px; /* Added padding to give more breathing space */
+  background-color: #ffffff; /* White background to make the container stand out */
+  display: flex; /* Use flexbox for centering */
+  flex-direction: column; /* Arrange child elements vertically */
+  align-items: center; /* Center child elements horizontally */
+  justify-content: flex-start; /* Align child elements to the top */
+}
+
+.chart-title {
+  text-align: center;
+  font-size: 1.5rem; /* Increase title size for better visibility */
+  font-weight: 700; /* Make title bold to stand out */
+  color: #333; /* Set a distinct color for emphasis */
+  margin-bottom: 15px; /* More space between title and subtitle */
+}
+
+.chart-subtitle {
+  text-align: center;
+  font-size: 1.2rem; /* Increase subtitle size slightly */
+  color: #6d6d6d; /* Softer color for the subtitle */
+  margin-bottom: 25px; /* Create extra space before the actual chart */
+}
+
+.chart-element {
+  width: 100%; /* Ensure the chart takes full width available */
+  max-width: 800px; /* Increase max width for better presentation */
+  height: 400px; /* Increase height for better visibility */
+}
 
 
-/* Chart container part in Performance Dashboard */
+
+
+.message-corner {
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-size: 1rem;  /* Slightly larger font size */
+  background-color: #f0f8ff;  /* Light blue background to resemble a message */
+  font-style: italic;  /* Italic style to indicate it's an analysis or comment */
+}
+
+.card-container {
+  border: 1px solid #e0e0e0; /* Soft border for subtle definition */
+  margin-top:15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-control {
+  margin-bottom: 20px;  /* Added margin to create space between dropdown and other elements */
+}
+
+.select-dataset {
+  width: 100%;
+  padding: 10px;  /* Added padding for better usability */
+  margin-bottom: 15px;  /* Space between the dropdown and the table */
+  border-radius: 8px;  /* Rounded corners */
+  border: 1px solid #ccc;  /* Subtle border to differentiate the dropdown */
+  background-color: #fff;  /* White background for clarity */
+}
+
+
+
+
+
 /* Chart container part in Performance Dashboard */
 @layer base {
   .performance-container {
@@ -813,14 +1034,14 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;  /* Ensure the container takes full width */
-    box-sizing: border-box;  /* Include padding and border in element's width */
+    width: 100%;  
+    box-sizing: border-box;  
   }
 
   .chart-container {
     z-index: 5; 
     width: 100%;
-    margin-top: 20px;  /* Adds spacing between the dataset card and chart container */
+    margin-top: 20px;  
     padding: 20px;
     background-color: var(--card);
     border-radius: 8px;
@@ -832,10 +1053,39 @@ input[type="text"] {
   }
   
   .chart-container .recharts-responsive-container {
-    width: 100%;  /* Use full width of the container */
-    max-width: 800px;  /* Set a maximum width for readability */
-    height: 500px;  /* Adjust height as needed */
+    width: 100%;
+    height: 400px; /* Ensures both charts have the same height */
   }
+
+  .performance-bar-chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .chart-row {
+    display: flex;
+    gap: 20px;
+    width: 100%; /* Ensures the row takes full width */
+  }
+  
+  /* Ensures both charts take equal width */
+  .chart-row > div {
+    flex: 1;
+  }
+
+  /* If necessary, add a media query to adjust for smaller screens */
+  @media (max-width: 768px) {
+    .chart-row {
+      flex-direction: column;
+    }
+
+    .chart-row > div {
+      width: 100%;
+    }
+  }
+}
+
 
   /* :root {
     --background: 0 0% 100%;
@@ -857,4 +1107,4 @@ input[type="text"] {
     --chart-1: 142 88% 28%;
     --chart-2: 139 65% 20%;
   } */
-}
+
