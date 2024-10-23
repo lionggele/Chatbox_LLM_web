@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Reference: https://huggingface.co/spaces/evaluate-metric/squad
 
 import json
@@ -27,6 +26,28 @@ elif file_choice == '2':
 else:
     print("Invalid choice. Exiting...")
     exit()
+
+
+# select SQuAD dataset or TruthFul QA (now fixed is JSON)
+
+# link the comparison python into this  (the thing to select is the random sampling 10, 20 ,50 & 100)
+
+
+# submit but wil be the button to send it to LLM 
+
+
+# Gain all the LLM responses to display into the p[erforamance  
+# Display the LLM models that gave response 
+# the scrollable thing afte 5-8 reponse (front end)
+
+
+# Total F1 and BLEU to the graph Based on the reponse (separate it)
+
+## main and extra 
+# can put a leaderboard!!
+# in the end we will kept the response (F1 and BLEU of each llm model to compare it in graph )
+
+
 
 # Prepare data to send to LLM
 qa_pairs = []
@@ -104,18 +125,6 @@ with open(responses_output_file, 'w') as f:
 print(f"LLM responses have been saved to {responses_output_file}")
 
 ## can use the  regexes_to_ignore=["the ", "yell", "YELL"], ignore_case=True, ignore_punctuation=True) instead of the extra function
-=======
-import json
-import evaluate
-import os
-import re
-import string
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-
-# Load the SQuAD metric
-squad_metric = evaluate.load("squad")
-
->>>>>>> feature-branch
 def normalize_answer(s):
     """Lower text and remove punctuation, articles, and extra whitespace."""
     def remove_articles(text):
@@ -132,7 +141,6 @@ def normalize_answer(s):
 
     return white_space_fix(remove_articles(remove_punctuation(lower(s))))
 
-<<<<<<< HEAD
 # Evaluate responses
 squad_metric = load("squad")
 evaluation_results = []
@@ -153,34 +161,11 @@ for response in responses:
         result = squad_metric.compute(predictions=[prediction], references=[reference])
         #em = result['exact_match']
         f1 = result['f1']
-=======
-def evaluate_llm_responses(qa_pairs, responses, output_file,experiment_id):
-    evaluation_results = []
-    total_f1_score = 0
-    total_bleu_score = 0
-
-    for qa, response in zip(qa_pairs, responses):
-        prediction_text = response 
-        correct_answer = qa['answer']
-        
-        # Normalize prediction and reference
-        normalized_prediction = normalize_answer(prediction_text)
-        normalized_reference = normalize_answer(correct_answer)
-
-        # Prepare prediction and reference in the required format
-        prediction = {"prediction_text": normalized_prediction, "id": qa["id"]}
-        reference = {"answers": {"answer_start": [0], "text": [normalized_reference]}, "id": qa["id"]}
-
-        # Compute F1 and BLEU scores
-        result = squad_metric.compute(predictions=[prediction], references=[reference])
-        f1_score = result['f1']
->>>>>>> feature-branch
         smoothing_function = SmoothingFunction().method1
         bleu_score = sentence_bleu([normalized_reference.split()], normalized_prediction.split(), smoothing_function=smoothing_function)
         
         # Store the evaluation results
         evaluation_results.append({
-<<<<<<< HEAD
             "id": response["id"],
             "question": response["question"],
             "correct_answer": response["correct_answer"],
@@ -196,37 +181,3 @@ with open(evaluation_output_file, 'w') as f:
     json.dump(evaluation_results, f, indent=2)
 
 print(f"Evaluation results have been saved to {evaluation_output_file}")
-=======
-            "id": qa["id"],
-            "experiment_id": experiment_id, 
-            "context": qa['context'],
-            "question": qa['question'],
-            "correct_answer": qa['answer'],
-            "llm_response": prediction_text,
-            "f1_score": f1_score,
-            "bleu_score": bleu_score
-        })
-
-        total_f1_score += f1_score
-        total_bleu_score += bleu_score
-    
-    # Calculate average scores
-    average_f1_score = total_f1_score / len(qa_pairs) if qa_pairs else 0
-    average_bleu_score = total_bleu_score / len(qa_pairs) if qa_pairs else 0
-
-    average_metrics = {
-        "average_f1_score": average_f1_score,
-        "average_bleu_score": average_bleu_score
-    }
-
-    # Save evaluation results to a JSON file
-    try:
-        os.makedirs(os.path.dirname(output_file), exist_ok=True)
-        with open(output_file, 'w') as f:
-            json.dump({"evaluation_results": evaluation_results, "average_metrics": average_metrics}, f, indent=2)
-        print(f"Evaluation results have been saved to {output_file}")
-    except Exception as e:
-        print(f"Failed to save evaluation results: {e}")
-
-    return {"evaluation_results": evaluation_results, "average_metrics": average_metrics}
->>>>>>> feature-branch
