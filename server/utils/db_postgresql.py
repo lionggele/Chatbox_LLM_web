@@ -12,23 +12,17 @@ class EvaluationResult(db.Model):
     llm_response = db.Column(db.Text)
     f1_score = db.Column(db.Float)
     bleu_score = db.Column(db.Float)
+    rouge_score = db.Column(db.Float)  # ROUGE score for TruthfulQA
 
     def __repr__(self):
         return f"<EvaluationResult {self.id}>"
 
 class ExperimentResult(db.Model):
-    # __tablename__ = 'evaluation_result'
     id = db.Column(db.Integer, primary_key=True)
     experiment_id = db.Column(db.String(100), unique=True, nullable=False)  # Updated length for descriptive experiment_id
     average_f1_score = db.Column(db.Float)
     average_bleu_score = db.Column(db.Float)
-
+    average_rouge_score = db.Column(db.Float)  # Average ROUGE score
 
     def __repr__(self):
         return f"<ExperimentResult {self.experiment_id}>"
-    
-
-
-
-
-
