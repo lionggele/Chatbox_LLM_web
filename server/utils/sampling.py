@@ -1,32 +1,35 @@
 import json
-import os
 import random
 import csv
 from pathlib import Path
 
 # Define base directory
-BASE_DIR = Path(__file__).resolve().parent.parent 
+BASE_DIR = Path(__file__).resolve().parent.parent  # This will point to your base directory
+
+# File paths
 squad_input_file = BASE_DIR / 'dataset' / 'SQuAD-dev-v2.0.json'
-truthfulqa_input_file = BASE_DIR / 'dataset' / 'TruthfulQA_dev.csv'
+truthfulqa_input_file = BASE_DIR / 'dataset' / 'TruthfulQA.json'
 
 # Generic function to sample dataset
 def sample_dataset(dataset_name, sampling_size):
     if dataset_name.lower() == 'squad':
         return sample_squad_dataset(sampling_size)
     elif dataset_name.lower() == 'truthfulqa':
-        return sample_truthfulqa_dataset(sampling_size,truthfulqa_input_file)
+        return sample_truthfulqa_dataset(sampling_size)
     else:
         raise ValueError("Unsupported dataset name provided.")
 
 # Function to sample SQuAD dataset
 def sample_squad_dataset(sampling_size):
+    # Read the JSON file
     with open(squad_input_file, 'r') as f:
         data = json.load(f)
 
     dataset = data.get('data', [])
 
+    # Collect all QA pairs from the dataset
     qa_pairs = []
-    id_counter = 1  
+    id_counter = 1  # Initialize a counter for IDs
 
     for article in dataset:
         title = article.get('title', )
@@ -52,47 +55,42 @@ def sample_squad_dataset(sampling_size):
 
     return write_sampled_data(qa_pairs, sampling_size, dataset_name='squad')
 
-def sample_truthfulqa_dataset(sampling_size, truthfulqa_input_file):
+# Function to sample TruthfulQA dataset
+def sample_truthfulqa_dataset(sampling_size):
+    # Read the JSON file
     with open(truthfulqa_input_file, 'r') as f:
-        reader = csv.DictReader(f)
-        dataset = list(reader)  
+        data = json.load(f)
+
+    dataset = data.get('data', [])
 
     # Collect all QA pairs from the dataset
     qa_pairs = []
-    id_counter = 1  
+    id_counter = 1  # Initialize a counter for IDs
 
     for item in dataset:
-        question = item.get('Question', '')
-        answer = item.get('Best Answer', '')
-        correct_answers = item.get('Correct Answers', '').split(';') if 'Correct Answers' in item else []  # Split on semicolons or use empty list
-        incorrect_answers = item.get('Incorrect Answers', '').split(';') if 'Incorrect Answers' in item else []  # Split on semicolons or use empty list
-        category = item.get('Category', '')
-        source = item.get('Source', '')
-
+        question = item.get('question', '')
+        answer = item.get('best_answer', '')
         qa_id = f'id_{id_counter}'
         id_counter += 1
 
         qa_pairs.append({
             "id": qa_id,
             "question": question,
-            "answer": answer,
-            "correct_answers": correct_answers,
-            "incorrect_answers": incorrect_answers,
-            "category": category,
-            "source": source
+            "answer": answer
         })
 
     return write_sampled_data(qa_pairs, sampling_size, dataset_name='truthfulqa', is_truthfulqa=True)
 
-
 # Function to write sampled data to JSON and CSV
 def write_sampled_data(qa_pairs, sampling_size, dataset_name, is_truthfulqa=False):
+    # Take a random sample of the QA pairs
     sampled_data = random.sample(qa_pairs, min(sampling_size, len(qa_pairs)))
+
+    # Prepare file paths with dataset name
     sampled_output_file = BASE_DIR / 'dataset' / f'sampled_{dataset_name}_data.json'
     csv_output_file = BASE_DIR / 'dataset' / f'{dataset_name}_output.csv'
 
-    os.makedirs(BASE_DIR / 'dataset', exist_ok=True)
-
+    # Write the sampled data to a new JSON file
     with open(sampled_output_file, 'w') as f:
         json.dump({"sampled_data": sampled_data}, f, indent=2)
 
@@ -100,34 +98,22 @@ def write_sampled_data(qa_pairs, sampling_size, dataset_name, is_truthfulqa=Fals
 
     # Prepare CSV headers
     if is_truthfulqa:
-        csv_headers = ['id', 'question', 'answer', 'correct_answers', 'incorrect_answers',
-                       'category', 'source', 'bleu_score', 'rouge_score']
+        csv_headers = ['id', 'question', 'answer']
     else:
         csv_headers = ['id', 'article_title', 'paragraph_context', 'question', 'answer', 'answer_start']
 
     # Write sampled data to CSV file
-    try:
-        with open(csv_output_file, 'w', newline='', encoding='utf-8') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(csv_headers)
+    with open(csv_output_file, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(csv_headers)
 
-            for qa_pair in sampled_data:
-                if is_truthfulqa:
-                    writer.writerow([
-                        qa_pair['id'], qa_pair['question'], qa_pair['answer'],
-                        qa_pair['correct_answers'], qa_pair['incorrect_answers'],
-                        qa_pair['category'], qa_pair['source'], 'N/A', 'N/A'  # Placeholder for BLEU and ROUGE scores
-                    ])
-                else:
-                    writer.writerow([
-                        qa_pair['id'], qa_pair['title'], qa_pair['context'],
-                        qa_pair['question'], qa_pair['answer'], qa_pair['answer_start']
-                    ])
+        # Write each sampled QA pair to the CSV file
+        for qa_pair in sampled_data:
+            if is_truthfulqa:
+                writer.writerow([qa_pair['id'], qa_pair['question'], qa_pair['answer']])
+            else:
+                writer.writerow([qa_pair['id'], qa_pair['title'], qa_pair['context'], qa_pair['question'], qa_pair['answer'], qa_pair['answer_start']])
 
-        print(f"Sampled data has been successfully written to {csv_output_file}")
-    except PermissionError as e:
-        print(f"PermissionError: Unable to write to {csv_output_file}. Ensure no other program is using this file and that you have write permissions.")
-    except Exception as e:
-        print(f"Failed to write CSV file due to an error: {e}")
+    print(f"Sampled data has been successfully written to {csv_output_file}")
 
     return sampled_data

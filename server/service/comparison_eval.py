@@ -6,7 +6,6 @@ import re
 import string
 from nltk.translate.bleu_score import sentence_bleu
 from collections import Counter
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
 # File paths
 sampled_squad_file = '../dataset/sampled_SQuAD_data2.json'
@@ -37,6 +36,7 @@ def f1_score(prediction, ground_truth):
     num_same = sum(common.values())
 
     if len(prediction_tokens) == 0 or len(ground_truth_tokens) == 0:
+        # If either is empty, F1 is 0 unless they are both empty
         return int(prediction_tokens == ground_truth_tokens)
 
     if num_same == 0:
@@ -47,15 +47,26 @@ def f1_score(prediction, ground_truth):
     f1 = (2 * precision * recall) / (precision + recall)
     return f1
 
+# # Calculate BLEU Score
+# def bleu_score(prediction, ground_truth):
+#     prediction_tokens = normalize_text(prediction).split()
+#     ground_truth_tokens = [normalize_text(ground_truth).split()]  # Wrap in a list for sentence_bleu
+#     return sentence_bleu(ground_truth_tokens, prediction_tokens)
 
+
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
 # Calculate BLEU Score with smoothing
 def bleu_score(prediction, ground_truth):
     prediction_tokens = normalize_text(prediction).split()
-    ground_truth_tokens = [normalize_text(ground_truth).split()]  
+    ground_truth_tokens = [normalize_text(ground_truth).split()]  # Wrap in a list for sentence_bleu
     smoothie = SmoothingFunction().method4
     return sentence_bleu(ground_truth_tokens, prediction_tokens, smoothing_function=smoothie)
 
+# Rest of your script remains the same...
+
+
+# Evaluation results
 evaluation_results = []
 
 # Iterate through each response and compare with the ground truth
@@ -63,10 +74,12 @@ for i, (squad_entry, llm_response) in enumerate(zip(squad_data, llm_responses)):
     correct_answer = squad_entry[4]  
     response_text = llm_response.get('openai', '')  
 
+    # Calculate metrics
     em = exact_match_score(response_text, correct_answer)
     f1 = f1_score(response_text, correct_answer)
     bleu = bleu_score(response_text, correct_answer)
 
+    # Store the results
     evaluation_results.append({
         "id": squad_entry[0],
         "question": squad_entry[3],
@@ -77,6 +90,7 @@ for i, (squad_entry, llm_response) in enumerate(zip(squad_data, llm_responses)):
         "bleu_score": bleu
     })
 
+# Print evaluation summary
 total_em = sum(result["exact_match"] for result in evaluation_results)
 total_f1 = sum(result["f1_score"] for result in evaluation_results)
 total_bleu = sum(result["bleu_score"] for result in evaluation_results)
@@ -90,6 +104,7 @@ print(f"Average Exact Match (EM): {average_em:.2f}%")
 print(f"Average F1 Score: {average_f1:.2f}")
 print(f"Average BLEU Score: {average_bleu:.2f}")
 
+# Save evaluation results to a JSON file
 comparison_output_file = 'evaluation_results.json'
 with open(comparison_output_file, 'w') as f:
     json.dump(evaluation_results, f, indent=2)
