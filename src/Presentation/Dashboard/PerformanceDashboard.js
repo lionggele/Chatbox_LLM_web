@@ -1,6 +1,8 @@
+
 "use client";
 
 import React, { useState, useContext, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { ModelContext } from '../../Domain/Models/ModelContext';
 import { modelOptions } from '../DropDown/ModelDropDown';
 import checkMarkIcon from '../../assets/selected_icon.png';
@@ -33,7 +35,7 @@ function PerformanceDashboard() {
   const [selectedExperimentDataset, setSelectedExperimentDataset] = useState('');
   const [selectedExperimentSampling, setSelectedExperimentSampling] = useState('');
   const [viewAllWithSameId, setViewAllWithSameId] = useState(false);
-  const [newEvaluatedResults, setNewEvaluatedResults] = useState([]); // State to store newly evaluated results
+  const [newEvaluatedResults, setNewEvaluatedResults] = useState([]);
 
   // Fetch saved evaluation results when the component loads
   useEffect(() => {
@@ -47,6 +49,11 @@ function PerformanceDashboard() {
             ...item,
             ...parseExperimentId(item.experiment_id),
           }));
+
+          //console.log("All Parsed Results:", parsedResults); // Log all parsed results
+
+          const filteredResults = parsedResults.filter((experiment) => experiment.dataset === selectedDataset);
+          // console.log("Filtered Results (Dataset: " + selectedDataset + "):", filteredResults); // Log filtered results for the dataset
           setEvaluationResults(parsedResults);
         } else {
           console.error('Failed to fetch evaluation results');
@@ -70,11 +77,16 @@ function PerformanceDashboard() {
           experiment.model === selectedExperimentModel &&
           experiment.samplingSize === selectedExperimentSampling.toString()
       );
+
+      console.log("Filtered Experiments:", filteredExperiments);
+
       setExperimentOptions(filteredExperiments);
     } else {
       setExperimentOptions([]);
     }
   }, [selectedExperimentDataset, selectedExperimentModel, selectedExperimentSampling, evaluationResults]);
+
+
 
   // Model Selection
   const handleModelSelect = (modelName) => {
@@ -85,6 +97,7 @@ function PerformanceDashboard() {
   // Dataset Selection
   const handleDatasetSelect = (datasetName) => {
     setSelectedDataset(datasetName);
+    // console.log("Selected Dataset: ", datasetName);
   };
 
   // Sampling Selection
@@ -125,8 +138,8 @@ function PerformanceDashboard() {
         const result = await response.json();
         setMessage('Dataset processed successfully!');
         if (result && Array.isArray(result.evaluation_results)) {
-          setNewEvaluatedResults(result.evaluation_results); // Save the new evaluation results
-          setEvaluationResults([...evaluationResults, ...result.evaluation_results]); // Update the overall evaluation results
+          setNewEvaluatedResults(result.evaluation_results);
+          setEvaluationResults([...evaluationResults, ...result.evaluation_results]);
         } else {
           console.error("Invalid response format. Expected an array for evaluation_results.");
           setEvaluationResults([]);
@@ -147,22 +160,23 @@ function PerformanceDashboard() {
     setIsExpanded(!isExpanded);
   };
 
-  const handleAddRow = () => {
-    setRows([...rows, { prediction: '', reference: '' }]);
-  };
+  // Future implementation for https://huggingface.co/spaces/evaluate-metric/f1
+  // const handleAddRow = () => {
+  //   setRows([...rows, { prediction: '', reference: '' }]);
+  // };
 
-  const handleRowChange = (index, field, value) => {
-    const updatedRows = [...rows];
-    updatedRows[index][field] = value;
-    setRows(updatedRows);
-  };
+  // const handleRowChange = (index, field, value) => {
+  //   const updatedRows = [...rows];
+  //   updatedRows[index][field] = value;
+  //   setRows(updatedRows);
+  // };
 
-  const handleClear = () => {
-    setRows([{ prediction: '', reference: '' }]);
-    setMessage('');
-  };
+  // const handleClear = () => {
+  //   setRows([{ prediction: '', reference: '' }]);
+  //   setMessage('');
+  // };
 
-  // Prepare data for the charts
+
   const prepareChartData = (experimentData) => {
     if (!experimentData || (Array.isArray(experimentData) && experimentData.length === 0)) {
       return [];
@@ -172,6 +186,7 @@ function PerformanceDashboard() {
 
   return (
     <div className="performance-container">
+
       {/* Model Selection and Dataset Configuration UI */}
       <div className="model-selection">
         <h3 className="dropdown-trigger" onClick={() => setDropdownOpen(!dropdownOpen)}>
@@ -197,11 +212,12 @@ function PerformanceDashboard() {
           </div>
         )}
       </div>
+
       {/* Dataset and Sampling Selection */}
       <div className="button-group-container">
         <span><h3 className="title-performanceboard">Dataset:</h3></span>
         <div className="dataset-button-group">
-          {['SQuAD', 'Truthful'].map((dataset) => (
+          {['SQuAD', 'TruthfulQA'].map((dataset) => (
             <button
               key={dataset}
               className={`dataset-button ${selectedDataset === dataset ? 'selected' : ''}`}
@@ -233,48 +249,69 @@ function PerformanceDashboard() {
       </div>
 
       {/* New Evaluated Results Display */}
-      {/* <div className={`dataset-card ${isExpanded ? 'expanded' : ''}`}> */}
-        <div className="new-evaluated-results-container">
-          <h3 className="title-performanceboard">Newly Evaluated Results</h3>
-          <table className="new-evaluated-table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Experiment ID</th>
-                <th>Context</th>
-                <th>Question</th>
-                <th>Answer</th>
-                <th>LLM Response</th>
-                <th>F1 Score</th>
-                <th>BLEU Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {newEvaluatedResults.length > 0 ? (
-                newEvaluatedResults.map((experiment) => (
-                  <tr key={experiment.id}>
-                    <td>{experiment.id}</td>
-                    <td>{experiment.experiment_id || 'N/A'}</td>
-                    <td>{experiment.context || 'N/A'}</td>
-                    <td>{experiment.question || 'N/A'}</td>
-                    <td>{experiment.correct_answer || 'N/A'}</td>
-                    <td>{experiment.llm_response || 'N/A'}</td>
-                    <td>{experiment.f1_score != null ? Number(experiment.f1_score).toFixed(5) : 'N/A'}</td>
-                    <td>{experiment.bleu_score != null ? Number(experiment.bleu_score).toFixed(5) : 'N/A'}</td>
-                  </tr>
-                ))
+      <div className="new-evaluated-results-container">
+        <h3 className="title-performanceboard">Newly Evaluated Results</h3>
+        <table className="new-evaluated-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Experiment ID</th>
+              {selectedDataset === 'SQuAD' && <th>Context</th>}
+              <th>Question</th>
+              <th>Answer</th>
+              <th>LLM Response</th>
+              {selectedDataset === 'TruthfulQA' ? (
+                <>
+                  <th>BLEU Score</th>
+                  <th>ROUGE Score</th>
+                </>
               ) : (
-                <tr>
-                  <td colSpan="8">No new evaluation available yet.</td>
-                </tr>
+                <>
+                  <th>F1 Score</th>
+                  <th>BLEU Score</th>
+                </>
               )}
-            </tbody>
-          </table>
-          <div className='chart-container'>
-            <PerformanceBarChart data={prepareChartData(newEvaluatedResults)} />
-          </div>
+            </tr>
+          </thead>
+          <tbody>
+            {newEvaluatedResults.length > 0 ? (
+              newEvaluatedResults.map((experiment) => (
+                <tr key={experiment.id}>
+                  <td>{experiment.id}</td>
+                  <td>{experiment.experiment_id || 'N/A'}</td>
+                  {selectedDataset === 'SQuAD' && (
+                    <td>{experiment.context || 'N/A'}</td>
+                  )}
+                  <td>{experiment.question || 'N/A'}</td>
+                  <td>{experiment.correct_answer || 'N/A'}</td>
+                  <td className="llm-response-cell">
+                    <ReactMarkdown>{experiment.llm_response || 'N/A'}</ReactMarkdown>
+                  </td>{/* Suggested by Chatgpt to format the reponse */}
+                  {selectedDataset === 'TruthfulQA' ? (
+                    <>
+                      <td>{experiment.bleu_score != null ? experiment.bleu_score.toFixed(5) : 'N/A'}</td>
+                      <td>{experiment.rouge_score != null ? experiment.rouge_score.toFixed(5) : 'N/A'}</td>
+                    </>
+                  ) : (
+                    <>
+                      <td>{experiment.f1_score != null ? experiment.f1_score.toFixed(5) : 'N/A'}</td>
+                      <td>{experiment.bleu_score != null ? experiment.bleu_score.toFixed(5) : 'N/A'}</td>
+                    </>
+                  )}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8">No new evaluation available yet.</td>
+              </tr>
+            )}
+
+          </tbody>
+        </table>
+        <div className='chart-container'>
+          <PerformanceBarChart data={prepareChartData(newEvaluatedResults)} selectedDataset={selectedDataset} />
         </div>
-      {/* </div> */}
+      </div>
 
       {/* Generated Performance Dataset and Experiment Selection */}
       <div className={`dataset-card ${isExpanded ? 'expanded' : ''}`}>
@@ -303,7 +340,7 @@ function PerformanceDashboard() {
                 onChange={(e) => setSelectedExperimentDataset(e.target.value)}
               >
                 <option value="">Select Dataset</option>
-                {['SQuAD', 'Truthful'].map((dataset) => (
+                {['SQuAD', 'TruthfulQA'].map((dataset) => (
                   <option key={dataset} value={dataset}>
                     {dataset}
                   </option>
@@ -339,6 +376,9 @@ function PerformanceDashboard() {
               ))}
             </select>
           </div>
+
+          {/* Button to view all the same experiment ID */}
+
           <button
             className="view-all-button"
             onClick={() => handleViewAllWithSameId(selectedExperiment?.experiment_id)}
@@ -346,7 +386,22 @@ function PerformanceDashboard() {
           >
             View All with Same Experiment ID
           </button>
+
+          <button
+            className="view-all-button"
+            onClick={() => {
+              setSelectedExperimentModel('');
+              setSelectedExperimentDataset('');
+              setSelectedExperimentSampling('');
+              setSelectedExperiment(null);
+              setViewAllWithSameId(false);
+            }}
+          >
+            Reset Filters
+          </button>
         </div>
+
+        {/* Generated Performance Dataset and Experiment Selection table */}
         <div className="dataset-table-wrapper">
           <table className="dataset-table">
             <thead>
@@ -359,6 +414,7 @@ function PerformanceDashboard() {
                 <th>LLM Response</th>
                 <th>F1 Score</th>
                 <th>BLEU Score</th>
+                <th>ROUGE Score</th>
               </tr>
             </thead>
             <tbody>
@@ -370,9 +426,12 @@ function PerformanceDashboard() {
                     <td>{experiment.context || 'N/A'}</td>
                     <td>{experiment.question || 'N/A'}</td>
                     <td>{experiment.correct_answer || 'N/A'}</td>
-                    <td>{experiment.llm_response || 'N/A'}</td>
+                    <td className="llm-response-cell">
+                      <ReactMarkdown>{experiment.llm_response || 'N/A'}</ReactMarkdown>
+                    </td>
                     <td>{experiment.f1_score != null ? Number(experiment.f1_score).toFixed(5) : 'N/A'}</td>
                     <td>{experiment.bleu_score != null ? Number(experiment.bleu_score).toFixed(5) : 'N/A'}</td>
+                    <td>{experiment.rouge_score != null ? Number(experiment.rouge_score).toFixed(5) : 'N/A'}</td>
                   </tr>
                 ))
               ) : selectedExperiment ? (
@@ -382,13 +441,16 @@ function PerformanceDashboard() {
                   <td>{selectedExperiment.context || 'N/A'}</td>
                   <td>{selectedExperiment.question || 'N/A'}</td>
                   <td>{selectedExperiment.correct_answer || 'N/A'}</td>
-                  <td>{selectedExperiment.llm_response || 'N/A'}</td>
+                  <td className="llm-response-cell">
+                    <ReactMarkdown>{selectedExperiment.llm_response || 'N/A'}</ReactMarkdown>
+                  </td>
                   <td>{selectedExperiment.f1_score != null ? Number(selectedExperiment.f1_score).toFixed(5) : 'N/A'}</td>
                   <td>{selectedExperiment.bleu_score != null ? Number(selectedExperiment.bleu_score).toFixed(5) : 'N/A'}</td>
+                  <td>{selectedExperiment.rouge_score != null ? Number(selectedExperiment.rouge_score).toFixed(5) : 'N/A'}</td>
                 </tr>
               ) : (
                 <tr>
-                  <td colSpan="8">No response available</td>
+                  <td colSpan="9">No response available</td>
                 </tr>
               )}
             </tbody>
@@ -397,15 +459,23 @@ function PerformanceDashboard() {
         <button onClick={toggleExpand} className="toggle-button">
           {isExpanded ? 'Show Less' : 'Show More'}
         </button>
+
+        {/*  the chart continaer for generated data from the past */}
         <div className='chart-container'>
-          <PerformanceBarChart
-            data={prepareChartData(
-              viewAllWithSameId && selectedExperiment && Array.isArray(selectedExperiment)
-                ? selectedExperiment
-                : [selectedExperiment, ...newEvaluatedResults].filter(Boolean)
-            )}
-          />
+          {selectedExperiment ? (
+            <PerformanceBarChart
+              data={prepareChartData(
+                viewAllWithSameId && selectedExperiment && Array.isArray(selectedExperiment)
+                  ? selectedExperiment
+                  : selectedExperiment ? [selectedExperiment] : newEvaluatedResults
+              )}
+              selectedDataset={selectedExperimentDataset || selectedDataset}
+            />
+          ) : (
+            <p>No chart data available. Please select an experiment and generate the chart.</p>
+          )}
         </div>
+
       </div>
     </div>
   );

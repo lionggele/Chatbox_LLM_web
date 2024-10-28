@@ -1,6 +1,5 @@
  /* Reference: https://tailwindcss.com/docs/installation & https://ui.shadcn.com/docs/installation/manual */
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -59,7 +58,6 @@ h2 {
   font-size: 30px;
   white-space: nowrap;
 }
-
 
 .side-item {
   font-family: var(--font-family);
@@ -143,6 +141,7 @@ h2 {
   font-size: 18px;
 }
 
+
 /* DropDown Style */
 .dropdown-options {
   position: absolute;
@@ -224,18 +223,18 @@ h2 {
 .msg:last-of-type {
   margin: 0;
 }
-
 /* MSG Style */
 .msg-bubble {
   background-color: #f1f1f1;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
   margin: 5px;
   max-width: 80%;
   word-wrap: break-word;
-  line-height: 1.6;
+  line-height: 1.3; 
   color: #4f4f4f;
   font-size: 18px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .msg-bubble h1,
@@ -245,47 +244,37 @@ h2 {
 .msg-bubble h5,
 .msg-bubble h6 {
   font-weight: bold;
-  margin: 10px 0;
-}
-
-.msg-bubble ul {
-  padding-left: 20px;
-  margin: 0;
-}
-
-.msg-bubble li {
-  margin-bottom: 8px;
-}
-
-.msg-bubble ol {
-  padding-left: 25px;
-  margin: 0;
-}
-
-.msg-bubble ol li {
-  margin-bottom: 8px;
+  margin: 8px 0;
 }
 
 .msg-bubble blockquote {
-  margin: 0;
+  margin: 5px 0;
   padding: 10px;
   background-color: #e8f5e9;
   border-left: 4px solid #4caf50;
+  font-style: italic;
 }
 
 .msg-bubble pre {
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-radius: 5px;
+  background-color: #000; 
+  color: #fff; 
+  padding: 15px;
+  border-radius: 8px;
   overflow-x: auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  line-height: 1.4; 
+  margin: 8px 0;
+  border: 1px solid #444; 
 }
 
+/* Inline Code Styling */
 .msg-bubble code {
-  background-color: #eee;
+  color: #fffff; 
   padding: 2px 4px;
-  border-radius: 3px;
+  border-radius: 4px;
   font-family: "Courier New", Courier, monospace;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .msg-bubble strong {
@@ -305,9 +294,13 @@ h2 {
   border: 0;
   height: 1px;
   background: #ddd;
-  margin: 10px 0;
+  margin: 5px 0;
 }
 
+.msg-avatar {
+  font-size: 2rem;
+  margin-right: 10px;
+}
 
 .msg-info {
   display: flex;
@@ -321,6 +314,7 @@ h2 {
   font-weight: bold;
 }
 
+/* Styling for Bot Messages */
 .left-msg {
   color: #777;
 }
@@ -329,6 +323,7 @@ h2 {
   border-bottom-left-radius: 0;
 }
 
+/* Styling for User Messages */
 .right-msg {
   display: flex;
   align-items: right;
@@ -343,10 +338,57 @@ h2 {
 
 .msg-text {
   margin-left: 3px;
+  white-space: pre-wrap; 
+}
+
+.msg-bubble {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.msg-bubble a:hover {
+  color: #0b5ed7;
+}
+
+.msg-bubble blockquote {
+  margin: 5px 0;
+  padding: 15px;
+  background-color: #f0f9f0;
+  border-left: 5px solid #4caf50;
+  border-radius: 5px;
+}
+
+/* Added Styling for Lists to Improve Readability */
+.msg-bubble ul, .msg-bubble ol {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.msg {
+  margin-bottom: 10px;
+}
+
+.left-msg .msg-avatar, .right-msg .msg-avatar {
+  align-self: flex-start;
+}
+
+@media (max-width: 768px) {
+  .msg-content {
+    max-width: 85%;
+  }
+
+  .msg-bubble {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .msg-avatar {
+    font-size: 1.5rem;
+  }
 }
 
 
 
+/* Char Input area */
 .chat-input {
   display: flex;
   padding: 10px;
@@ -391,8 +433,6 @@ h2 {
   flex-wrap: wrap;
 }
 
-
-/* Chat Container Styling for Side-by-Side Layout */
 .chat-side-container {
   flex: 1;
   height: 80vh;
@@ -428,7 +468,7 @@ h2 {
   padding: 10px 20px;
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 100vh; /* Adjust height to fit within the viewport, ensuring scrolling works */
+  max-height: 100vh; 
 }
 
 .model-selection {
@@ -542,7 +582,6 @@ h3.title-performanceboard {
 
 .data-input {
   width: 100%;
-  /* Match the width of the container it's inside */
   padding: 15px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -575,7 +614,6 @@ input[type="text"] {
 .new-row-btn {
   background-color: #ffffff;
   border: 2px solid #165a72;
-  /* Green color for border */
   border-radius: 10px;
   cursor: pointer;
   margin-bottom: 10px;
@@ -596,7 +634,6 @@ input[type="text"] {
 
 .data-input-btn {
   background-color: var(--right-msg-bg);
-  /*#165a72; /* Green background */
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -640,8 +677,8 @@ input[type="text"] {
   align-items: center;
   width: 100%;
   max-height: 90vh;
-  overflow-y: auto; /* Enable scrolling for the entire container */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; 
+  overflow-x: hidden;
   background-color: var(--ctr-bg);
   border-radius: 10px;
   margin: 10px 5px;
@@ -662,7 +699,6 @@ input[type="text"] {
   background-color: var(--right-msg-bg); 
 }
 
-/* Sampling Button Styling */
 .sampling-button {
   background-color: var(--ctr-bg);
   color: #333;
@@ -693,19 +729,19 @@ input[type="text"] {
 }
 
 .new-evaluated-table {
-  width: 100%;  /* Make the table take the full width of the container */
-  border-collapse: collapse;  /* Merge table borders to avoid double lines */
-  margin-top: 15px;  /* Space between the heading and table */
+  width: 100%;  
+  border-collapse: collapse;  
+  margin-top: 15px; 
 }
 
 .new-evaluated-table th, .new-evaluated-table td {
-  border: 1px solid #ccc;  /* Light border for each cell */
-  padding: 10px;  /* Space inside cells for readability */
-  text-align: left;  /* Align text to the left for consistency */
+  border: 1px solid #ccc;  
+  padding: 10px; 
+  text-align: left; 
 }
 
 .new-evaluated-table th {
-  background-color: #f9f9f9;  /* Light background for header cells */
+  background-color: #f9f9f9; 
   font-weight: bold;
 }
 
@@ -724,7 +760,7 @@ input[type="text"] {
 }
 
 .dataset-title-container {
-  border: 1px solid #ddd; 
+    border: 1px solid #ddd; 
   background-color: #f0f0f0;
   font-weight: bold;
   position: sticky;
@@ -831,7 +867,7 @@ input[type="text"] {
   background-color: lightblue;
 }
 
-/* LoadingSpinner.css */
+/* LoadingSpinner: not using it but just left this here */
 .spinner-overlay {
   position: fixed;
   top: 0;
@@ -860,60 +896,58 @@ input[type="text"] {
 }
 
 
-
-/* CSS Code for Enhanced Styling */
 .view-all-button {
-  border: 2px solid #2e6b44; /* Dark green border */
+  border: 2px solid #2e6b44; 
   border-radius: 12px;
   padding: 10px 20px;
-  background: linear-gradient(135deg, #2e6b44, #4caf50); /* Gradient background */
-  color: #fff; /* White text */
+  background: linear-gradient(135deg, #2e6b44, #4caf50); 
+  color: #fff; 
   font-weight: bold;
   cursor: pointer;
   margin-top: 10px;
-  transition: all 0.3s ease; /* Smooth transition for all changes */
+  transition: all 0.3s ease; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .view-all-button.selected {
-  background: linear-gradient(135deg, #4caf50, #2e6b44); /* Darker gradient when selected */
-  border: 2px solid #4caf50; /* Emphasize the selected state */
+  background: linear-gradient(135deg, #4caf50, #2e6b44); 
+  border: 2px solid #4caf50; 
 }
 
 .view-all-button:hover:not(:disabled) {
-  transform: scale(1.05); /* Slightly increase the button size */
-  background: linear-gradient(135deg, #4caf50, #81c784); /* Lighter gradient for hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More shadow on hover */
+  transform: scale(1.05); 
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
 }
 
 .view-all-button:disabled {
-  background: #ccc; /* Gray color for disabled state */
+  background: #ccc; 
   color: #888;
   cursor: not-allowed;
 }
 
 .view-all-button:focus {
-  outline: 3px solid #c8e6c9; /* Light green focus outline for better accessibility */
+  outline: 3px solid #c8e6c9; 
   outline-offset: 2px;
 }
 
-/* Laederboard */
+/* Leaderboard */
 .leaderboard-container {
-  margin: 20px auto;  /* Adds margin to the top and bottom, aligns center horizontally */
-  padding: 15px;  /* Increased padding for better spacing */
+  margin: 20px auto;  
+  padding: 15px;  
   border: 1px solid #ccc;
   border-radius: 10px;
   background: #f9f9f9;
   width: 100%; 
-  overflow-x: auto;  /* Allows horizontal scroll if needed */
+  overflow-x: auto;  
 }
 
 .title-performanceboard {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 2rem;  /* Increased font size to make it stand out more */
-  font-weight: bold;  /* Make the title bold */
-  color: #333;  /* Slightly darker color for better contrast */
+  font-size: 2rem;  
+  font-weight: bold;  
+  color: #333;  
 }
 
 .leaderboard-table {
@@ -925,22 +959,22 @@ input[type="text"] {
 }
 
 .leaderboard-table th {
-  padding: 10px; /* Reduced padding slightly for a cleaner look */
-  border-bottom: 2px solid #e0e0e0; /* Subtle bottom border for emphasis */
-  background-color: #f5f5f5; /* Light gray background for a neutral appearance */
-  color: #333; /* Darker text color for better readability */
-  font-size: 1rem; /* Standardized font size */
-  text-transform: capitalize; /* Use capitalization for a less aggressive emphasis */
-  font-weight: bold; /* Keep bold text for distinction */
-  text-align: center; /* Center-align text for a balanced layout */
-  letter-spacing: 0.02em; /* Slightly reduced letter spacing */
-  user-select: none; /* Prevent accidental text selection */
-  white-space: nowrap; /* Prevent text wrapping in the header */
+  padding: 10px; 
+  border-bottom: 2px solid #e0e0e0; 
+  background-color: #f5f5f5; 
+  color: #333; 
+  font-size: 1rem; 
+  text-transform: capitalize; 
+  font-weight: bold; 
+  text-align: center; 
+  letter-spacing: 0.02em; 
+  user-select: none; 
+  white-space: nowrap; 
 }
 
 .leaderboard-table th,
 .leaderboard-table td {
-  padding: 12px;  /* Increased padding for better readability */
+  padding: 12px; 
   border: 1px solid #ddd;
 }
 
@@ -954,42 +988,39 @@ input[type="text"] {
 }
 
 .chart-container-leaderboard {
-  margin: 0 auto; /* Center the container horizontally */
-  width: 100%; /* Make the container take up more of the viewport width */
-  overflow: hidden; /* Remove unnecessary scrolling */
-  border: 1px solid #e0e0e0; /* Soft border for subtle definition */
-  border-radius: 12px; /* Slightly more rounded corners for a modern look */
-  padding: 30px; /* Added padding to give more breathing space */
-  background-color: #ffffff; /* White background to make the container stand out */
-  display: flex; /* Use flexbox for centering */
-  flex-direction: column; /* Arrange child elements vertically */
-  align-items: center; /* Center child elements horizontally */
-  justify-content: flex-start; /* Align child elements to the top */
+  margin: 0 auto;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .chart-title {
   text-align: center;
-  font-size: 1.5rem; /* Increase title size for better visibility */
-  font-weight: 700; /* Make title bold to stand out */
-  color: #333; /* Set a distinct color for emphasis */
-  margin-bottom: 15px; /* More space between title and subtitle */
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
 }
 
 .chart-subtitle {
   text-align: center;
-  font-size: 1.2rem; /* Increase subtitle size slightly */
-  color: #6d6d6d; /* Softer color for the subtitle */
-  margin-bottom: 25px; /* Create extra space before the actual chart */
+  font-size: 1.2rem;
+  color: #6d6d6d;
+  margin-bottom: 25px;
 }
 
 .chart-element {
-  width: 100%; /* Ensure the chart takes full width available */
-  max-width: 800px; /* Increase max width for better presentation */
-  height: 400px; /* Increase height for better visibility */
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
 }
-
-
-
 
 .message-corner {
   border-radius: 12px;
@@ -997,32 +1028,37 @@ input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 10px;
   margin-top: 20px;
-  font-size: 1rem;  /* Slightly larger font size */
-  background-color: #f0f8ff;  /* Light blue background to resemble a message */
-  font-style: italic;  /* Italic style to indicate it's an analysis or comment */
+  font-size: 1rem;
+  background-color: #f0f8ff;
+  font-style: italic;
 }
 
 .card-container {
-  border: 1px solid #e0e0e0; /* Soft border for subtle definition */
-  margin-top:15px;
+  border: 1px solid #e0e0e0;
+  margin-top: 15px;
   border-radius: 12px;
   margin-bottom: 20px;
   width: 100%;
 }
 
 .form-control {
-  margin-bottom: 20px;  /* Added margin to create space between dropdown and other elements */
+  margin-bottom: 20px;
 }
 
 .select-dataset {
   width: 100%;
-  padding: 10px;  /* Added padding for better usability */
-  margin-bottom: 15px;  /* Space between the dropdown and the table */
-  border-radius: 8px;  /* Rounded corners */
-  border: 1px solid #ccc;  /* Subtle border to differentiate the dropdown */
-  background-color: #fff;  /* White background for clarity */
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
 }
 
+.llm-response-cell {
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.6;
+}
 
 
 
@@ -1054,7 +1090,7 @@ input[type="text"] {
   
   .chart-container .recharts-responsive-container {
     width: 100%;
-    height: 400px; /* Ensures both charts have the same height */
+    height: 400px; 
   }
 
   .performance-bar-chart-container {
@@ -1066,15 +1102,13 @@ input[type="text"] {
   .chart-row {
     display: flex;
     gap: 20px;
-    width: 100%; /* Ensures the row takes full width */
+    width: 100%; 
   }
   
-  /* Ensures both charts take equal width */
   .chart-row > div {
     flex: 1;
   }
 
-  /* If necessary, add a media query to adjust for smaller screens */
   @media (max-width: 768px) {
     .chart-row {
       flex-direction: column;
@@ -1085,26 +1119,4 @@ input[type="text"] {
     }
   }
 }
-
-
-  /* :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --primary: 142 86% 28%;
-    --primary-foreground: 356 29% 98%;
-    --chart-1: 139 65% 20%;
-    --chart-2: 140 74% 44%;
-
-  }
-
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --chart-1: 142 88% 28%;
-    --chart-2: 139 65% 20%;
-  } */
 

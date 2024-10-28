@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
-import { Bar } from 'react-chartjs-2';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
 import {
     Card,
     CardHeader,
-    Typography,
     CardContent,
     Select,
     MenuItem,
@@ -32,15 +21,11 @@ import {
 } from 'recharts';
 import '../../style/App.css';
 
-// Register components for Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
 function Leaderboard() {
     const [modelAverages, setModelAverages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [selectedDataset, setSelectedDataset] = useState('Selected the dataset');
+    const [selectedDataset, setSelectedDataset] = useState('Select a dataset');
 
-    // Function to fetch model averages
     const fetchModelAverages = async () => {
         setLoading(true);
         try {
@@ -60,38 +45,22 @@ function Leaderboard() {
         }
     };
 
-    // Function to generate insights about the chart
+    //this is just for fun, the inital plan is to use Chatgpt to evaluate the evaluated result. but last to do. hahah 
     function generateChartAnalysis(modelAverages) {
         if (modelAverages.length === 0) {
             return 'No data available for analysis.';
         }
-        const bestModel = modelAverages.reduce((prev, curr) => (prev.average_f1_score > curr.average_f1_score ? prev : curr));
-        return `The best performing model is ${bestModel.model} with an average F1 score of ${bestModel.average_f1_score.toFixed(
-            2
-        )} and an average BLEU score of ${bestModel.average_bleu_score.toFixed(2)}.`;
+        const bestModel = modelAverages.reduce((prev, curr) =>
+            (prev.average_f1_score || 0) > (curr.average_f1_score || 0) ? prev : curr
+        );
+        return `The best performing model is ${bestModel.model} with an average F1 score of ${bestModel.average_f1_score?.toFixed(2) || 'N/A'}, an average BLEU score scaled by 10 of ${bestModel.average_bleu_score?.toFixed(2) || 'N/A'}, and an average ROUGE score scaled by 1000 of ${bestModel.average_rouge_score?.toFixed(2) || 'N/A'}.`;
     }
 
-    // Data for the Chart.js chart
-    const chartData = {
-        labels: modelAverages.map((model) => model.model),
-        datasets: [
-            {
-                label: 'Average F1 Score',
-                data: modelAverages.map((model) => model.average_f1_score),
-                backgroundColor: '#4caf50',
-            },
-            {
-                label: 'Average BLEU Score',
-                data: modelAverages.map((model) => model.average_bleu_score),
-                backgroundColor: '#81c784',
-            },
-        ],
-    };
 
-    // Recharts Chart with dual Y-Axis
     const scaledData = modelAverages.map((item) => ({
         ...item,
-        bleu_score_scaled: item.average_bleu_score * 1000,
+        bleu_score_scaled: (item.average_bleu_score || 0) * 1000,
+        rouge_score_scaled: (item.average_rouge_score || 0) * 1000,
     }));
 
     return (
@@ -107,8 +76,7 @@ function Leaderboard() {
                     label="Select Dataset"
                 >
                     <MenuItem value="SQuAD">SQuAD</MenuItem>
-                    <MenuItem value="Truthful">Truthful</MenuItem>
-                    {/* Add more dataset options as needed */}
+                    <MenuItem value="TruthfulQA">TruthfulQA</MenuItem>
                 </Select>
             </FormControl>
 
@@ -129,37 +97,33 @@ function Leaderboard() {
                     <tr>
                         <th>Rank</th>
                         <th>Model</th>
-                        <th>Average F1 Score</th>
-                        <th>Average BLEU Score</th>
+                        {selectedDataset === 'SQuAD' && <th>Average F1 Score</th>}
+                        <th>Average BLEU Score (scaled by 1000)</th>
+                        {selectedDataset === 'TruthfulQA' && <th>Average ROUGE Score (scaled by 1000)</th>}
                     </tr>
                 </thead>
                 <tbody>
-                    {modelAverages
-                        .map((model, index) => (
-                            <tr key={model.model}>
-                                <td>{index + 1}</td>
-                                <td>{model.model}</td>
-                                <td>{model.average_f1_score.toFixed(2)}</td>
-                                <td>{model.average_bleu_score.toFixed(2)}</td>
-                            </tr>
-                        ))}
+                    {modelAverages.map((model, index) => (
+                        <tr key={model.model}>
+                            <td>{index + 1}</td>
+                            <td>{model.model}</td>
+                            {selectedDataset === 'SQuAD' && (
+                                <td>{model.average_f1_score != null ? model.average_f1_score.toFixed(2) : 'N/A'}</td>
+                            )}
+                            <td>{model.average_bleu_score != null ? (model.average_bleu_score * 1000).toFixed(2) : 'N/A'}</td>
+                            {selectedDataset === 'TruthfulQA' && (
+                                <td>{model.average_rouge_score != null ? (model.average_rouge_score * 1000).toFixed(2) : 'N/A'}</td>
+                            )}
+                        </tr>
+                    ))}
                 </tbody>
             </table>
-
-            {/* Chart.js Chart
-            <div className="chart-container-leaderboard">
-                <h3 className="chart-title">Model Comparison Chart (Bar Chart)</h3>
-                <p className="chart-subtitle">Comparison of average F1 and BLEU scores for different models.</p>
-                <div className="chart-element">
-                    <Bar data={chartData} key={JSON.stringify(chartData)} />
-                </div>
-            </div> */}
 
             {/* Dual Y-Axis Chart */}
             <Card className="card-container">
                 <CardHeader
-                    title="Model Comparison Chart (Bar Chart)"
-                    subheader="Comparison of average F1 and BLEU scores for different models."
+                    title="Model Comparison Chart (Bar Chart) - BLEU Scaled by 1000, ROUGE Scaled by 1000"
+                    subheader="Comparison of average metrics for different models."
                     titleTypographyProps={{ align: 'center', variant: 'h5', fontWeight: 'bold' }}
                     subheaderTypographyProps={{ align: 'center', variant: 'body1' }}
                 />
@@ -173,21 +137,25 @@ function Leaderboard() {
                                 <YAxis yAxisId="right" orientation="right" domain={[0, 'auto']} />
                                 <RechartsTooltip />
                                 <RechartsLegend />
-                                <ReBar yAxisId="left" dataKey="average_f1_score" fill="#3498db" radius={[4, 4, 0, 0]} />
+                                {selectedDataset === 'SQuAD' && (
+                                    <ReBar yAxisId="left" dataKey="average_f1_score" fill="#2ecc71" radius={[4, 4, 0, 0]} />
+                                )}
                                 <ReBar yAxisId="right" dataKey="bleu_score_scaled" fill="#e74c3c" radius={[4, 4, 0, 0]} />
+                                {selectedDataset === 'TruthfulQA' && (
+                                    <ReBar yAxisId="right" dataKey="rouge_score_scaled" fill="#2ecc71" radius={[4, 4, 0, 0]} />
+                                )}
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
                 </CardContent>
             </Card>
 
-
-
+            {/* Generated ChatGPT Analysis Messages */}
             <div className="message-corner">
                 <h3 className="title-performanceboard">ChatGPT Analysis</h3>
                 <p>{generateChartAnalysis(modelAverages)}</p>
             </div>
-        </div >
+        </div>
     );
 }
 

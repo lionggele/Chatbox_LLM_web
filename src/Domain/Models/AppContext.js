@@ -1,25 +1,14 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
-// Create Context
 export const AppContext = createContext();
 
-// Create Provider component to wrap your app and provide state
-export const AppProvider = ({ children }) => {
-    const [chatData, setChatData] = useState([]);
-    const [comparisonData, setComparisonData] = useState([]);
-    const [performanceData, setPerformanceData] = useState([]);
+export const StateProvider = ({ children }) => {
+    const [messages, setMessages] = useState([
+        { text: "Hi, I’m Sunflower, your ChatGPT assistant. How can I assist you?", sender: 'bot' }
+    ]);
 
     return (
-        <AppContext.Provider
-            value={{
-                chatData,
-                setChatData,
-                comparisonData,
-                setComparisonData,
-                performanceData,
-                setPerformanceData,
-            }}
-        >
+        <AppContext.Provider value={{ messages, setMessages }}>
             {children}
         </AppContext.Provider>
     );

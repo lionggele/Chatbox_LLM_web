@@ -1,3 +1,4 @@
+// Message UI user and Bot
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
@@ -6,6 +7,9 @@ function MessageList({ messages }) {
         <div className="msgs">
             {messages.map((msg, index) => (
                 <div key={index} className={`msg ${msg.sender === 'bot' ? 'left-msg' : 'right-msg'}`}>
+                    <div className="msg-avatar">
+                        {msg.sender === 'bot' ? '🌻' : '🐳'}
+                    </div>
                     <div className="msg-bubble">
                         <div className="msg-info">
                             <div className="msg-info-name">{msg.sender === 'bot' ? 'BOT' : 'User'}</div>

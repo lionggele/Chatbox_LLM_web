@@ -1,6 +1,5 @@
-// LoadingSpinner.js
 import React from 'react';
-import '../../style/App.css'; // Make sure to create this CSS file
+import '../../style/App.css';
 
 function LoadingSpinner() {
   return (

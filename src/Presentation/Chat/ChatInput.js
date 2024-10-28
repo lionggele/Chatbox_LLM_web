@@ -1,4 +1,4 @@
-// src/Presentation/Chat/ChatInput.js
+// Set up Chat Input UI
 import React, { useState } from 'react';
 
 function ChatInput({ onSend }) {

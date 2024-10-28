@@ -38,7 +38,6 @@ function SideBar() {
                 <MenuItem icon={<DashboardRoundedIcon />}>
                     <Link to="/performance">Performance Dashboard</Link>
                 </MenuItem>
-                {/* Updated Testing SubMenu to include a link to the Leaderboard */}
                 <SubMenu label="Testing" icon={<ScienceRoundedIcon />}>
                     <MenuItem icon={<LeaderboardRoundedIcon />}>
                         <Link to="/leaderboard">Leaderboard</Link>

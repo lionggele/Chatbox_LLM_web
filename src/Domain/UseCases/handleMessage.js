@@ -1,7 +1,4 @@
 // // Handle message from User and LLM Model
-// import { sendToFlask } from '../../Data/apiService';
-// import { fetchResponseFromModel } from '../../Domain/UseCases/handleModel';
-
 export const handleSendMessage = async (input, setMessages, selectedModel, setLoading, messages) => {
     setLoading(true);
 
@@ -18,6 +15,7 @@ export const handleSendMessage = async (input, setMessages, selectedModel, setLo
         });
 
         const data = await response.json();
+
         // Update messages with the model's response
         setMessages([...messages, { text: input, sender: 'user' }, { text: data[selectedModel], sender: 'bot' }]);
     } catch (error) {
