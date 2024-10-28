@@ -429,10 +429,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-<<<<<<< HEAD
   /* Adjust spacing between the chat boxes */
-=======
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
   padding: 20px;
   flex-wrap: wrap;
 }
@@ -440,13 +437,7 @@ h2 {
 .chat-side-container {
   flex: 1;
   height: 80vh;
-<<<<<<< HEAD
-  /* Adjust the height as per your design requirements */
   max-width: calc(50% - 10px);
-  /* Allow both chat boxes to take equal space */
-=======
-  max-width: calc(50% - 10px);
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
   background-color: var(--ctr-bg);
   border-radius: 10px;
   margin: 10px 5px;
@@ -686,25 +677,15 @@ input[type="text"] {
   flex-direction: column;
   align-items: center;
   width: 100%;
-<<<<<<< HEAD
-  max-height: 90vh; /* Limit height to make container scrollable */
-=======
-  max-height: 90vh;
-<<<<<<< HEAD
+ max-height: 90vh;
   overflow-y: auto; 
-  overflow-x: hidden;
-=======
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
-  overflow-y: auto; /* Enable scrolling for the entire container */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
->>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
+  overflow-x: hidden; 
   background-color: var(--ctr-bg);
   border-radius: 10px;
   margin: 10px 5px;
   padding: 10px 20px;
 }
 
-<<<<<<< HEAD
 .dataset-card {
   margin-top: 10px;
   width: 100%;
@@ -717,12 +698,11 @@ input[type="text"] {
 
 
 .dataset-card.expanded {
-  max-height: 1000px; /* Set to a large value to show all rows */
+  max-height: 1000px; 
 }
 
 .dataset-title-container {
-=======
-/* Dataset Button Styling */
+}
 .dataset-button {
   background-color: var(--ctr-bg); 
   color: #333;
@@ -783,163 +763,97 @@ input[type="text"] {
 }
 
 .dataset-card {
-  margin-top: px;
+  margin-top: 10px;
   width: 100%;
+  max-height: 250px;
   overflow-y: visible;
   position: relative;
   border-radius: 7px;
   transition: max-height 0.3s ease;
-  z-index: 10; 
 }
 
 .dataset-card.expanded {
-  max-height: 3000px; 
+  max-height: 1000px; 
 }
 
 .dataset-title-container {
-<<<<<<< HEAD
-    border: 1px solid #ddd; 
-=======
-  border: 1px solid #ddd; 
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
->>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
+  border: 1px solid #ddd;
   background-color: #f0f0f0;
   font-weight: bold;
   position: sticky;
   top: 0;
-<<<<<<< HEAD
-  z-index: 3;
-  padding: 10px 14px;
-=======
-  z-index: 11; 
+  z-index: 11;
   padding: 8px 14px;
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 }
 
 .dataset-table {
   width: 100%;
-  table-layout: fixed; 
-<<<<<<< HEAD
-  position: relative;
+  table-layout: fixed;
   word-wrap: break-word;
+  border-collapse: collapse;
+  margin-bottom: 10px;
 }
 
 .dataset-table th,
-=======
-  word-wrap: break-word;
-}
-
-
-
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 .dataset-table td {
   padding: 8px;
   text-align: center;
+  border: 1px solid #ddd;
   white-space: normal;
-<<<<<<< HEAD
 }
 
 .dataset-table th {
   background-color: #f0f0f0;
   font-weight: bold;
-  text-align: center;
   position: sticky;
-  top: 0; /* Ensure header stays at the top */
-  z-index: 2;
-}
-
-
-.dataset-table th:nth-child(3),
-.dataset-table td:nth-child(3) {
-  width: 30%;
-}
-
-.dataset-table th:nth-child(4),
-.dataset-table td:nth-child(4) {
-  width: 20%;
-}
-
-.dataset-table th:nth-child(6),
-.dataset-table td:nth-child(6) {
-  width: 25%;
-}
-
-
-.dataset-card {
-  max-height: 300px;
-  /* overflow-y: auto; */
-=======
-  border: 1px solid #ddd; 
-}
-
-.dataset-table th {
-  padding: 8px;
-  text-align: center;
-  white-space: normal;
-  background-color: #f0f0f0;
-  font-weight: bold;
-  position: sticky;
-  border: 1px solid #ddd; 
   top: 0;
-  z-index: 11; 
+  z-index: 11;
 }
 
-
-/* Experiment ID */
+/* Column Width Adjustments */
 .dataset-table th:nth-child(2),
 .dataset-table td:nth-child(2) {
-  width: 8%; 
+  width: 8%; /* Experiment ID */
 }
 
-
-/* Context */
 .dataset-table th:nth-child(3),
 .dataset-table td:nth-child(3) {
-  width: 35%; 
+  width: 35%; /* Context */
 }
 
-/* Question */
 .dataset-table th:nth-child(4),
 .dataset-table td:nth-child(4) {
-  width:10%; 
+  width: 10%; /* Question */
 }
 
-/* Answer */
 .dataset-table th:nth-child(5),
 .dataset-table td:nth-child(5) {
-  width: 8%; 
+  width: 8%; /* Answer */
 }
 
-/* LLM Response  */
 .dataset-table th:nth-child(6),
 .dataset-table td:nth-child(6) {
-  width: 20%; 
+  width: 20%; /* LLM Response */
 }
 
-/* F1 Score */
 .dataset-table th:nth-child(7),
 .dataset-table td:nth-child(7) {
-  width: 5%; 
+  width: 5%; /* F1 Score */
 }
 
-/* BLEU Score*/
 .dataset-table th:nth-child(8),
 .dataset-table td:nth-child(8) {
-  width: 5%; 
+  width: 5%; /* BLEU Score */
 }
-
-
 
 .dataset-table-wrapper {
   position: relative;
   overflow-x: auto;
-  max-height: 3000px;
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
+  max-height: 300px;
 }
 
-
 .toggle-button {
-  align-self: center; 
+  align-self: center;
   margin-top: 10px;
   padding: 10px 20px;
   background-color: var(--right-msg-bg);
@@ -956,24 +870,17 @@ input[type="text"] {
   background-color: lightblue;
 }
 
-<<<<<<< HEAD
-/* LoadingSpinner: not using it but just left this here */
-=======
-<<<<<<< HEAD
 
 
 
 /* Chart container part in Performance Dashboard */
-=======
-/* LoadingSpinner.css */
->>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
 .spinner-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.8); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -999,7 +906,7 @@ input[type="text"] {
   border: 2px solid #2e6b44; 
   border-radius: 12px;
   padding: 10px 20px;
-  background: linear-gradient(135deg, #2e6b44, #4caf50); 
+  background: linear-gradient(135deg, #2e6b44, #4caf50);  
   color: #fff; 
   font-weight: bold;
   cursor: pointer;
@@ -1160,9 +1067,6 @@ input[type="text"] {
 }
 
 
-
-
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 /* Chart container part in Performance Dashboard */
 @layer base {
   .performance-container {
@@ -1170,41 +1074,27 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     gap: 20px;
-<<<<<<< HEAD
-    width: 100%;  /* Ensure the container takes full width */
-    box-sizing: border-box;  /* Include padding and border in element's width */
-  }
-
-  .chart-container {
-    width: 100%;  /* Ensure the container takes the full width of its parent */
-    margin-top: 20px;
-=======
     width: 100%;  
     box-sizing: border-box;  
   }
 
   .chart-container {
-    z-index: 5; 
-    width: 100%;
-    margin-top: 20px;  
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
+    width: 100%; 
+    margin-top: 20px;
     padding: 20px;
     background-color: var(--card);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
-    display: flex;  /* To center the content inside */
+    display: flex;  
     justify-content: center;
-    align-items: center; /* Ensure the chart is vertically centered */
-    box-sizing: border-box; /* Include padding and border in element's width */
+    align-items: center; 
+    box-sizing: border-box; 
   }
 
   .chart-container .recharts-responsive-container {
-    width: 100%;  /* Use full width of the container */
-    max-width: 800px;  /* Set a maximum width for readability */
-    height: 500px;  /* Adjust height as needed */
-  }
-=======
+    width: 100%;  
+    max-width: 800px;  
+    height: 500px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1243,9 +1133,6 @@ input[type="text"] {
   }
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 
   /* :root {
     --background: 0 0% 100%;
@@ -1267,9 +1154,5 @@ input[type="text"] {
     --chart-1: 142 88% 28%;
     --chart-2: 139 65% 20%;
   } */
-<<<<<<< HEAD
-}
-=======
 
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
->>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
+

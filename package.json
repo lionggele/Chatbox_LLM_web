@@ -13,49 +13,20 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     "lucide-react": "^0.453.0",
-=======
     "eslint": "^9.12.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.37.1",
->>>>>>> 63df201fab5db49ffe0106b964933a9d8979234f
-=======
->>>>>>> feature-branch
-=======
     "chart.js": "^4.4.5",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-react": "^7.37.1",
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
-<<<<<<< HEAD
     "react-markdown": "^9.0.1",
-=======
-<<<<<<< HEAD
-    "react-markdown": "^9.0.1",
-    "react-pro-sidebar": "^1.1.0",
-    "react-router-dom": "^6.26.2",
-    "react-scripts": "5.0.1",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "recharts": "^2.13.0",
-=======
-    "shadcn-ui": "^0.9.2",
->>>>>>> 63df201fab5db49ffe0106b964933a9d8979234f
-=======
->>>>>>> feature-branch
-=======
->>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
     "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "recharts": "^2.13.0",
     "shadcn-ui": "^0.9.2",
->>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
     "web-vitals": "^2.1.4"
   },
   "scripts": {
