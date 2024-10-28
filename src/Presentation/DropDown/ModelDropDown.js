@@ -5,10 +5,17 @@ import { ModelContext } from '../../Domain/Models/ModelContext';
 import checkMarkIcon from '../../assets/selected_icon.png';
 
 export const modelOptions = {
+<<<<<<< HEAD
+    openai: 'OpenAI GPT',
+    googlevertex: 'Google Vertex AI',
+    anthropic: 'Anthropic Claude',
+    mistral : 'Mistral AI'
+=======
     openai: 'GPT 4o Mini',
     googlevertex: 'Gemini-1.5-Flash',
     mistral: 'Mistral AI small latest',
     anthropic: 'Anthropic Claude (unpaid)',
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 };
 
 
@@ -17,7 +24,11 @@ const ModelDropdown = ({ dropdownOpen, setDropdownOpen }) => {
     const [error, setError] = useState(null);
 
     const handleModelSelect = (modelName) => {
+<<<<<<< HEAD
+        setSelectedModel(modelName);  
+=======
         setSelectedModel(modelName);
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
         setDropdownOpen(false);
     };
 

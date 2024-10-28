@@ -429,6 +429,10 @@ h2 {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+<<<<<<< HEAD
+  /* Adjust spacing between the chat boxes */
+=======
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
   padding: 20px;
   flex-wrap: wrap;
 }
@@ -436,7 +440,13 @@ h2 {
 .chat-side-container {
   flex: 1;
   height: 80vh;
+<<<<<<< HEAD
+  /* Adjust the height as per your design requirements */
   max-width: calc(50% - 10px);
+  /* Allow both chat boxes to take equal space */
+=======
+  max-width: calc(50% - 10px);
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
   background-color: var(--ctr-bg);
   border-radius: 10px;
   margin: 10px 5px;
@@ -676,15 +686,42 @@ input[type="text"] {
   flex-direction: column;
   align-items: center;
   width: 100%;
+<<<<<<< HEAD
+  max-height: 90vh; /* Limit height to make container scrollable */
+=======
   max-height: 90vh;
+<<<<<<< HEAD
   overflow-y: auto; 
   overflow-x: hidden;
+=======
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
+  overflow-y: auto; /* Enable scrolling for the entire container */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+>>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
   background-color: var(--ctr-bg);
   border-radius: 10px;
   margin: 10px 5px;
   padding: 10px 20px;
 }
 
+<<<<<<< HEAD
+.dataset-card {
+  margin-top: 10px;
+  width: 100%;
+  max-height: 250px; 
+  overflow-y: visible;
+  position: relative;
+  border-radius: 7px;
+  transition: max-height 0.3s ease; 
+}
+
+
+.dataset-card.expanded {
+  max-height: 1000px; /* Set to a large value to show all rows */
+}
+
+.dataset-title-container {
+=======
 /* Dataset Button Styling */
 .dataset-button {
   background-color: var(--ctr-bg); 
@@ -760,27 +797,78 @@ input[type="text"] {
 }
 
 .dataset-title-container {
+<<<<<<< HEAD
     border: 1px solid #ddd; 
+=======
+  border: 1px solid #ddd; 
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
+>>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
   background-color: #f0f0f0;
   font-weight: bold;
   position: sticky;
   top: 0;
+<<<<<<< HEAD
+  z-index: 3;
+  padding: 10px 14px;
+=======
   z-index: 11; 
   padding: 8px 14px;
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 }
 
 .dataset-table {
   width: 100%;
   table-layout: fixed; 
+<<<<<<< HEAD
+  position: relative;
+  word-wrap: break-word;
+}
+
+.dataset-table th,
+=======
   word-wrap: break-word;
 }
 
 
 
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 .dataset-table td {
   padding: 8px;
   text-align: center;
   white-space: normal;
+<<<<<<< HEAD
+}
+
+.dataset-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  text-align: center;
+  position: sticky;
+  top: 0; /* Ensure header stays at the top */
+  z-index: 2;
+}
+
+
+.dataset-table th:nth-child(3),
+.dataset-table td:nth-child(3) {
+  width: 30%;
+}
+
+.dataset-table th:nth-child(4),
+.dataset-table td:nth-child(4) {
+  width: 20%;
+}
+
+.dataset-table th:nth-child(6),
+.dataset-table td:nth-child(6) {
+  width: 25%;
+}
+
+
+.dataset-card {
+  max-height: 300px;
+  /* overflow-y: auto; */
+=======
   border: 1px solid #ddd; 
 }
 
@@ -846,6 +934,7 @@ input[type="text"] {
   position: relative;
   overflow-x: auto;
   max-height: 3000px;
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 }
 
 
@@ -867,7 +956,17 @@ input[type="text"] {
   background-color: lightblue;
 }
 
+<<<<<<< HEAD
 /* LoadingSpinner: not using it but just left this here */
+=======
+<<<<<<< HEAD
+
+
+
+/* Chart container part in Performance Dashboard */
+=======
+/* LoadingSpinner.css */
+>>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
 .spinner-overlay {
   position: fixed;
   top: 0;
@@ -1063,6 +1162,7 @@ input[type="text"] {
 
 
 
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
 /* Chart container part in Performance Dashboard */
 @layer base {
   .performance-container {
@@ -1070,6 +1170,15 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     gap: 20px;
+<<<<<<< HEAD
+    width: 100%;  /* Ensure the container takes full width */
+    box-sizing: border-box;  /* Include padding and border in element's width */
+  }
+
+  .chart-container {
+    width: 100%;  /* Ensure the container takes the full width of its parent */
+    margin-top: 20px;
+=======
     width: 100%;  
     box-sizing: border-box;  
   }
@@ -1078,10 +1187,24 @@ input[type="text"] {
     z-index: 5; 
     width: 100%;
     margin-top: 20px;  
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
     padding: 20px;
     background-color: var(--card);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
+    display: flex;  /* To center the content inside */
+    justify-content: center;
+    align-items: center; /* Ensure the chart is vertically centered */
+    box-sizing: border-box; /* Include padding and border in element's width */
+  }
+
+  .chart-container .recharts-responsive-container {
+    width: 100%;  /* Use full width of the container */
+    max-width: 800px;  /* Set a maximum width for readability */
+    height: 500px;  /* Adjust height as needed */
+  }
+=======
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1120,3 +1243,33 @@ input[type="text"] {
   }
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
+
+  /* :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --primary: 142 86% 28%;
+    --primary-foreground: 356 29% 98%;
+    --chart-1: 139 65% 20%;
+    --chart-2: 140 74% 44%;
+
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --chart-1: 142 88% 28%;
+    --chart-2: 139 65% 20%;
+  } */
+<<<<<<< HEAD
+}
+=======
+
+>>>>>>> 86289d3141b7eba0c4c8692b51298ec24ec2b13e
+>>>>>>> 0cd475becc7315f2a82cd0250bc6d48f55b2edf7
