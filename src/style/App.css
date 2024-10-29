@@ -752,15 +752,56 @@ input[type="text"] {
 }
 
 .new-evaluated-table th, .new-evaluated-table td {
-  border: 1px solid #ccc;  
-  padding: 10px; 
-  text-align: left; 
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
 }
 
 .new-evaluated-table th {
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
   font-weight: bold;
 }
+
+.new-evaluated-table th:nth-child(2),
+.new-evaluated-table td:nth-child(2) {
+  width: 5%; /* Experiment ID */
+}
+
+.new-evaluated-table th:nth-child(3),
+.new-evaluated-table td:nth-child(3) {
+  width: 30%; /* Context */
+}
+
+.new-evaluated-table th:nth-child(4),
+.new-evaluated-table td:nth-child(4) {
+  width: 10%; /* Question */
+}
+
+.new-evaluated-table th:nth-child(5),
+.new-evaluated-table td:nth-child(5) {
+  width: 8%; /* Answer */
+}
+
+.new-evaluated-table th:nth-child(6),
+.new-evaluated-table td:nth-child(6) {
+  width: 20%; /* LLM Response */
+}
+
+.new-evaluated-table th:nth-child(7),
+.new-evaluated-table td:nth-child(7) {
+  width: 5%; /* F1 Score */
+}
+
+.new-evaluated-table th:nth-child(8),
+.new-evaluated-table td:nth-child(8) {
+  width: 5%; /* BLEU Score */
+}
+
+.new-evaluated-table th:nth-child(9),
+.new-evaluated-table td:nth-child(9) {
+  width: 5%; /* ROUGE Score */
+}
+
 
 .dataset-card {
   margin-top: 10px;
@@ -813,12 +854,12 @@ input[type="text"] {
 /* Column Width Adjustments */
 .dataset-table th:nth-child(2),
 .dataset-table td:nth-child(2) {
-  width: 8%; /* Experiment ID */
+  width: 5%; /* Experiment ID */
 }
 
 .dataset-table th:nth-child(3),
 .dataset-table td:nth-child(3) {
-  width: 35%; /* Context */
+  width: 30%; /* Context */
 }
 
 .dataset-table th:nth-child(4),

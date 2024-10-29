@@ -37,6 +37,7 @@ class OpenAIEngine(BaseEngine):
         try:
             response = openai_chain.invoke(message)
             response_content = response.content if hasattr(response, 'content') else "No content found"
+            print(response_content)
                 
             return EngineResponse(text=response_content)
 

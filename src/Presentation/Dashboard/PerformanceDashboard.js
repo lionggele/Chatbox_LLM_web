@@ -209,7 +209,7 @@ function PerformanceDashboard() {
 
       <div className="new-evaluated-results-container">
         <h3 className="title-performanceboard">Newly Evaluated Results</h3>
-        <table className="new-evaluated-table">
+        <table className="new-evaluated-table" >
           <thead>
             <tr>
               <th>Id</th>

@@ -14,7 +14,6 @@ def get_open_api_key():
     try:
         get_secret_value_response = client.get_secret_value(SecretId=secret_name)
         if 'SecretString' in get_secret_value_response:
-            # Parse the SecretString (JSON string) to get the API key
             secret_json = json.loads(get_secret_value_response['SecretString'])
             return secret_json.get('OPENAI_API_KEY')
         else:
