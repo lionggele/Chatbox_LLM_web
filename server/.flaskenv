@@ -1,6 +1,3 @@
-aws configure --profile llm_comparison
-
-
 GOOGLE_API_KEY=AIzaSyATiz_0qjWYrupUeWiNbO5Vo-tWGFNliyE
 PROJECT_NUMBER=284457257300
 MISTRALAI_API_KEY=1jCB4LyHYEEC1buOBy3z6xln493etLsT
