@@ -41,10 +41,6 @@ def query_llms():
             responses[model_name] = f"Error: Model '{model_name}' not found."
 
     return jsonify(responses)
-<<<<<<< HEAD
-=======
-    
->>>>>>> 03a837f2fd9291c543ec395e8ba4a31da5f4f8b8
 @api_blueprint.route('/process_dataset', methods=['POST'])
 def process_dataset():
     data = request.get_json()
@@ -278,8 +274,4 @@ def get_model_averages():
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 03a837f2fd9291c543ec395e8ba4a31da5f4f8b8
 
