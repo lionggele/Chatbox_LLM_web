@@ -1,16 +1,15 @@
-<<<<<<< HEAD
-FROM node:10.1.0
+FROM python:3.11.6 
+
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD [ "npm", "start" ]
-=======
-FROM python:3.11.6
-WORKDIR /app
-COPY requirements.txt requirements.txt
+
+COPY requirements.txt requirements.txt  
+
+RUN pip install --upgrade pip
+
 RUN pip install -r requirements.txt
+
 COPY . .
-CMD [ "python", "app.py" ]
->>>>>>> 03a837f2fd9291c543ec395e8ba4a31da5f4f8b8
+
+EXPOSE 5000
+
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
