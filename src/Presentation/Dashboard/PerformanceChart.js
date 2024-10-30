@@ -116,7 +116,7 @@ export function ROUGEScoreChart({ data }) {
               <YAxis />
               <Tooltip content={<CustomTooltip data={data} />} />
               <Legend />
-              <Bar dataKey="rouge_score" fill="#2ecc71" radius={4} />
+              <Bar dataKey="rouge_score" fill="#3498db" radius={4} />
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>
@@ -148,7 +148,7 @@ export function ComparisonChart({ data }) {
               <YAxis yAxisId="right" orientation="right" domain={[0, 'auto']} />
               <Tooltip content={<CustomTooltip data={scaledData} />} />
               <Legend />
-              <Bar yAxisId="left" dataKey="f1_score" fill="#2ecc71" radius={4} />
+              <Bar yAxisId="left" dataKey="f1_score" fill="#3498db" radius={4} />
               <Bar yAxisId="right" dataKey="bleu_score_scaled" fill="#e74c3c" radius={4} />
             </BarChart>
           </ResponsiveContainer>

@@ -10,13 +10,14 @@ services:
 
   backend:
     build:
-      context: ./server
+      context: ./server  
     ports:
       - "5000:5000"
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://postgres:Phil2:12-1!6@db:5432/llm_evaluation
+      - DATABASE_URL=postgresql://postgres:Phil2%3A12-16%21@db:5432/llm_evaluation
+    command: gunicorn -b 0.0.0.0:5000 app:app
 
   db:
     image: postgres:17
@@ -24,8 +25,8 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: your_database
+      POSTGRES_PASSWORD: Phil2:12-16!
+      POSTGRES_DB: llm_evaluation
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
