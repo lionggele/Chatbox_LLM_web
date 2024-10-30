@@ -23,10 +23,13 @@ def query_llms():
     data = request.get_json()
     query = data.get("query")
     selected_models = data.get("models")
+
     if not query:
         return jsonify({"error": "No query provided."}), 400
+
     if not selected_models:
         return jsonify({"error": "No models selected."}), 400
+
     responses = {}
     for model_name in selected_models:
         engine = engines.get(model_name)
@@ -35,7 +38,9 @@ def query_llms():
             responses[model_name] = response.text
         else:
             responses[model_name] = f"Error: Model '{model_name}' not found."
+
     return jsonify(responses)
+
 
 @api_blueprint.route('/process_dataset', methods=['POST'])
 def process_dataset():
@@ -43,15 +48,19 @@ def process_dataset():
     selected_model = data.get("selectedModel")
     selected_dataset = data.get("selectedDataset")
     selected_sampling = data.get("selectedSampling")
+
     if not selected_model:
         app.logger.error("No model selected.")
         return jsonify({"error": "No model selected."}), 400
+
     if not selected_dataset:
         app.logger.error("No dataset selected.")
         return jsonify({"error": "No dataset selected."}), 400
+
     if not selected_sampling:
         app.logger.error("No sampling size selected.")
         return jsonify({"error": "No sampling size selected."}), 400
+
     try:
         # Generate an experiment ID
         timestamp = dt.now().strftime("%Y%m%d_%H%M%S")
@@ -70,6 +79,7 @@ def process_dataset():
                 except ValueError as e:
                     app.logger.error(f"Error converting scores for QA ID {qa.get('id')}: {e}")
                     return jsonify({"error": f"Invalid score values for QA ID {qa.get('id')}. {e}"}), 400
+
                 qa_pairs.append({
                     "id": qa["id"],
                     "question": qa['question'],
@@ -79,6 +89,7 @@ def process_dataset():
                     "category": qa.get('category', ''),
                     "source": qa.get('source', '')
                 })
+
         else:
             # SQuAD processing: Has context, question, and answers
             qa_pairs = [{
@@ -100,6 +111,7 @@ def process_dataset():
                 response = engine.send(f"Question: {qa['question']}")
             else:
                 response = engine.send(f"Question: {qa['question']}\nContext: {qa['context']}")
+
             responses.append({
                 "id": qa["id"],
                 "experiment_id": experiment_id,
@@ -120,9 +132,19 @@ def process_dataset():
 
         # Different evaluation for TruthfulQA and SQuAD
         if selected_dataset.lower() == "truthfulqa":
-            result_data = evaluate_llm_responses_truthfulqa(qa_pairs, [resp['llm_response'] for resp in responses], evaluation_output_file, experiment_id)
+            result_data = evaluate_llm_responses_truthfulqa(
+                qa_pairs, 
+                [resp['llm_response'] for resp in responses], 
+                evaluation_output_file, 
+                experiment_id
+            )
         else:
-            result_data = evaluate_llm_responses_SQuAD(qa_pairs, [resp['llm_response'] for resp in responses], evaluation_output_file, experiment_id)
+            result_data = evaluate_llm_responses_SQuAD(
+                qa_pairs, 
+                [resp['llm_response'] for resp in responses], 
+                evaluation_output_file, 
+                experiment_id
+            )
 
         evaluation_results = result_data["evaluation_results"]
         average_f1_score = result_data["average_metrics"].get("average_f1_score", 0)
@@ -152,6 +174,7 @@ def process_dataset():
             average_rouge_score=average_rouge_score
         )
         db.session.add(experiment_entry)
+
         db.session.commit()
         print(f"Experiment {experiment_id} saved with average F1 score: {average_f1_score}, average BLEU score: {average_bleu_score}, and average ROUGE score: {average_rouge_score}.")
 
@@ -164,12 +187,12 @@ def process_dataset():
         app.logger.error(f"General error: {e}")
         return jsonify({"error": str(e)}), 500
 
+
 @api_blueprint.route('/get_evaluation_results', methods=['GET'])
 def get_evaluation_results():
     try:
         results = EvaluationResult.query.all()
         response_data = []
-
         for result in results:
             # Prepare common response data
             result_entry = {
@@ -179,6 +202,7 @@ def get_evaluation_results():
                 "correct_answer": result.correct_answer,
                 "llm_response": result.llm_response,
             }
+
             # Check if dataset is TruthfulQA and append additional fields
             if 'TruthfulQA' in result.experiment_id:
                 result_entry.update({
@@ -192,10 +216,13 @@ def get_evaluation_results():
                     "f1_score": result.f1_score,
                     "bleu_score": result.bleu_score
                 })
+
             response_data.append(result_entry)
+
         return jsonify(response_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 # Use in Leaderboard
 @api_blueprint.route('/get_model_averages', methods=['GET'])
@@ -213,12 +240,14 @@ def get_model_averages():
 
         results = query.all()
         print(f"Number of results fetched: {len(results)}")
+
         model_scores = defaultdict(lambda: {"total_f1": 0, "total_bleu": 0, "total_rouge": 0, "count": 0})
 
         for result in results:
             # Print the result to see available attributes
             print(vars(result))
             model_name_extracted = result.experiment_id.split('_')[2]
+
             if 'TruthfulQA' in result.experiment_id:
                 # For TruthfulQA, use BLEU and ROUGE scores
                 model_scores[model_name_extracted]["total_bleu"] += result.bleu_score or 0
@@ -227,6 +256,7 @@ def get_model_averages():
                 # For SQuAD, use f1_score and bleu_score
                 model_scores[model_name_extracted]["total_f1"] += result.f1_score or 0
                 model_scores[model_name_extracted]["total_bleu"] += result.bleu_score or 0
+
             model_scores[model_name_extracted]["count"] += 1
 
         response_data = []
@@ -246,7 +276,9 @@ def get_model_averages():
 
         response_data = sorted(response_data, key=lambda x: x.get('average_f1_score', 0), reverse=True)
         print("Response data:", response_data)
+
         return jsonify(response_data)
+
     except Exception as e:
         print(f"General Error: {str(e)}")
         return jsonify({"error": str(e)}), 500
